@@ -1,0 +1,74 @@
+[
+    {
+        "key": 1,
+        "title": "Automatic dart scoring system",
+        "monthYear": "January 2021",
+        "imagePath": "./projectPictures/dart/",
+        "image": [
+            "onWall.jpg"
+        ]
+    },
+    {
+        "key": 2,
+        "title": "Motorized skateboard",
+        "monthYear": "March 2021",
+        "imagePath": "./projectPictures/skateboard/",
+        "image": [
+            "front.png"
+        ]
+    },
+    {
+        "key": 3,
+        "title": "AI generated card game",
+        "monthYear": "June 2021",
+        "imagePath": "./projectPictures/cardGame/",
+        "image": [
+            "real.jpg"
+        ]
+    },
+    {
+        "key": 4,
+        "title": "3D-printed Settlers of Catan",
+        "monthYear": "September 2021",
+        "imagePath": "./projectPictures/catan/",
+        "image": [
+            "onTable.jpg"
+        ]
+    },
+    {
+        "key": 5,
+        "title": "Chess board",
+        "monthYear": "December 2021",
+        "imagePath": "./projectPictures/chessboard/",
+        "image": [
+            "onTable.jpg"
+        ]
+    },
+    {
+        "key": 6,
+        "title": "Home Server",
+        "monthYear": "December 2021",
+        "imagePath": "./projectPictures/dart/",
+        "image": [
+            "onWall.jpg"
+        ]
+    },
+    {
+        "key": 7,
+        "title": "Amera",
+        "monthYear": "December 2021",
+        "imagePath": "./projectPictures/dart/",
+        "image": [
+            "onWall.jpg"
+        ]
+    },
+    {
+        "key": 8,
+        "title": "Discy",
+        "monthYear": "December 2021",
+        "imagePath": "./projectPictures/dart/",
+        "image": [
+            "onWall.jpg"
+        ]
+    }
+]
