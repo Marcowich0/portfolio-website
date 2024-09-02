@@ -128,8 +128,8 @@ export default function WorkExperience() {
                                 }}
                             >
 
-                                <div className='bg-white rounded-full overflow-hidden'>
-                                    <img src={`/experienceLogos/${exp.image}`} className="h-10 w-10" />
+                                <div className='bg-white rounded-full overflow-hidden flex-shrink-0'>
+                                    <img src={`/experienceLogos/${exp.image}`} className="h-10 w-10 " />
                                 </div>
 
                                 <div className="overflow-hidden text-ellipsis whitespace-nowrap w-full">

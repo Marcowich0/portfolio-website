@@ -66,9 +66,8 @@ export default function Home() {
 
         <div id="experience"></div>
 
-        <Vortex
+        <motion.div
           className="snap-start flex flex-col items-center w-full h-full "
-          particleCount={100}
         >
           <AnimatedHeadline title="Work Experience" />
 
@@ -82,7 +81,7 @@ export default function Home() {
             </BackgroundGradient>
           </div>
 
-        </Vortex>
+        </motion.div>
 
 
 
@@ -92,9 +91,8 @@ export default function Home() {
 
 
         <div id="projects"></div>
-        <Vortex
+        <div
           className="snap-start flex flex-col items-center w-full h-full "
-          particleCount={300}
         >
           <AnimatedHeadline title="Projects" />
           <motion.div variants={headlineAnimation} initial="initial" whileInView="whileInView">
@@ -104,15 +102,14 @@ export default function Home() {
 
           <Projects />
 
-        </Vortex>
+        </div>
 
 
         {/* --------------------- Skills -------------------- */}
 
         <div id="skills"></div>
-        <Vortex
+        <div
           className="snap-start flex flex-col items-center w-full h-full "
-          particleCount={100}
         >
           <AnimatedHeadline title="Skills" />
 
@@ -124,7 +121,7 @@ export default function Home() {
             <SkillCategory />
           </div>
 
-        </Vortex>
+        </div>
 
 
 
@@ -132,9 +129,8 @@ export default function Home() {
         {/* --------------------- Hobies -------------------- */}
 
         <div id="hobies"></div>
-        <Vortex
+        <div
           className="snap-start flex flex-col items-center w-full h-full "
-          particleCount={100}
         >
           <AnimatedHeadline title="Hobies" />
 
@@ -146,7 +142,7 @@ export default function Home() {
             <HobbyTiles />
           </motion.div>
 
-        </Vortex>
+        </div>
       </div>
 
     </main>
