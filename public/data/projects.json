@@ -6,6 +6,20 @@
         "imagePath": "./projectPictures/dart/",
         "image": [
             "onWall.jpg"
+        ],
+        "description": [
+            "Build initial setup using 2 cheap webcams and 3D-printed mounts.",
+            "Wrote initial code using blob detection and line recognition in OpenCV.",
+            "Realized that blob detection works but is not accurate enough in 2D.",
+            "Applied linear transformations to project 3D position to 2D sub-space.",
+            "Begun experimenting with AI to recognize darts in an image.",
+            "Build improved setup with 4 elevated cameras and a light ring.",
+            "Using new setup to create training data for artificial neural network.",
+            "rained artificial neural network based on the YOLO v8 framework.",
+            "Realized that processing 4 cameras were too computational heavy to be viable.",
+            "Created final model with 3 elevated cameras.",
+            "Printed and assembled final construction.",
+            "Programmed the GUI and game mechanics."
         ]
     },
     {
@@ -15,6 +29,18 @@
         "imagePath": "./projectPictures/skateboard/",
         "image": [
             "front.png"
+        ],
+        "description": [
+            "Designed the basic layout of the components.",
+            "Ordered components from Chinese manufacture.",
+            "Designed basic circuit for motors and speed controller.",
+            "Powered circuit tested with laboratory power supply.",
+            "Welded the 30 battery cells together in series of 10 and connect to battery management system.",
+            "Designed enclosure for battery pack and electronics.",
+            "Machined brackets to mount motors on trucks.",
+            "Assembled all the parts.",
+            "Programed the speed controller for the given motors and remote.",
+            "Tested the final construction."
         ]
     },
     {
@@ -24,6 +50,18 @@
         "imagePath": "./projectPictures/cardGame/",
         "image": [
             "real.jpg"
+        ],
+        "description": [
+            "The initial concept was described.",
+            "The large language model (LLM) was primed to understand the concept of the game.",
+            "The game mechanics were established, including how players draw path cards, and engage in battles.",
+            "Used the LLM to create a set of characters, each with unique physical appearances and starting attributes.",
+            "Used LLM to create monsters, Items, spells, and potions to provide additional layers of strategy and resource management.",
+            "Values for attributes, probabilities, and effects were fine-tuned to ensure a balanced and enjoyable gaming experience.",
+            "Used Stable Diffusion, an open source text to image AI, to create illustrations for the cards.",
+            "Wrote a python script to automatically overlay stats on cards and create double sided print sheets.",
+            "Tested the game and iterated the stats.",
+            "Printed the game on heavy cardstock."
         ]
     },
     {
@@ -33,6 +71,14 @@
         "imagePath": "./projectPictures/catan/",
         "image": [
             "onTable.jpg"
+        ],
+        "description": [
+            "Downloaded files from online community",
+            "Repair broken meshes with repair algorithm.",
+            "Calibrate printer flow and and bed leveling",
+            "Fine tune slicer settings for individual parts",
+            "Paint the models",
+            "Print the models"
         ]
     },
     {
@@ -42,6 +88,16 @@
         "imagePath": "./projectPictures/chessboard/",
         "image": [
             "onTable.jpg"
+        ],
+        "description": [
+            "Cut woods into strips and glue in an alternating pattern.",
+            "Cut and glued border.",
+            "Created a case for the pieces.",
+            "Acquired dark and light wood for black and white pieces respectively.",
+            "Cut again and flipped half the strips.",
+            "Milled both sites to achieve smooth finish.",
+            "Cut remaining wood into lathe-able pieces.",
+            "Turned the pieces."
         ]
     },
     {
@@ -51,6 +107,18 @@
         "imagePath": "./projectPictures/dart/",
         "image": [
             "onWall.jpg"
+        ],
+        "description": [
+            "Research hardware requirements",
+            "Order parts and build computer.",
+            "Install Network attached storage (NAS) - software",
+            "Configure raid for drive redundancy",
+            "Open ports for streaming applications",
+            "Configure network access",
+            "Install docker containers for server application",
+            "Configure VPN tunnel for secure worldwide access",
+            "Configure virtual machines",
+            "Setup Cloudflare tunnel for secure access through custom domain"
         ]
     },
     {
@@ -60,6 +128,16 @@
         "imagePath": "./projectPictures/dart/",
         "image": [
             "onWall.jpg"
+        ],
+        "description": [
+            "Cut woods into strips and glue in an alternating pattern.",
+            "Cut and glued border.",
+            "Created a case for the pieces.",
+            "Acquired dark and light wood for black and white pieces respectively.",
+            "Cut again and flipped half the strips.",
+            "Milled both sites to achieve smooth finish.",
+            "Cut remaining wood into lathe-able pieces.",
+            "Turned the pieces."
         ]
     },
     {
@@ -69,6 +147,16 @@
         "imagePath": "./projectPictures/dart/",
         "image": [
             "onWall.jpg"
+        ],
+        "description": [
+            "Cut woods into strips and glue in an alternating pattern.",
+            "Cut and glued border.",
+            "Created a case for the pieces.",
+            "Acquired dark and light wood for black and white pieces respectively.",
+            "Cut again and flipped half the strips.",
+            "Milled both sites to achieve smooth finish.",
+            "Cut remaining wood into lathe-able pieces.",
+            "Turned the pieces."
         ]
     }
 ]

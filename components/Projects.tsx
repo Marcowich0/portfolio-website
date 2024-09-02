@@ -27,6 +27,7 @@ export default function Projects() {
         variants={fadeInAnimation}
         initial="initial"
         whileInView="whileInView"
+        onClick={() => console.log(project)}
       >
         <PinContainer
           key={project.key}
