@@ -1,40 +1,120 @@
+"use client";
 import React from 'react';
 import { motion } from 'framer-motion';
-import { AnimatedTooltip } from "./ui/animated-tooltip";
-
-import AnimatedSmallHeadline from "./AnimatedSmallHeadline.tsx";
 
 const containerVariants = {
     hidden: { opacity: 0, x: -100 },
-    visible: { opacity: 1, x: 0, transition: { type: 'spring', duration: 1.25, delay:0 } },
-  };
+    visible: { opacity: 1, x: 0, transition: { type: 'spring', duration: 1.25, delay: 0 } },
+};
 
-const renderSkillCategory = (title, items) => {
+interface Skill {
+    id: number;
+    name: string;
+    designation: string;
+    image: string;
+}
+
+const renderSkills = (skills: Skill[]) => {
+
+    // Calculate total width based on image dimensions (adjust as needed)
+    const width = skills.length * (128 + 16);
+    const totalWidth = (width + 16) * 3;
+    const duration = width / 20;
+
     return (
         <motion.div
-        className="flex flex-col items-center -mt-14"
-        initial="hidden"
-        whileInView="visible"
-        variants={containerVariants}
-      >
-        <AnimatedSmallHeadline title={title} />
-        <div className="flex flex-row items-center justify-center mb-6 w-full">
-          <AnimatedTooltip items={items} />
-        </div>
-      </motion.div>
+            className="overflow-hidden h-full"
+            initial={{ x: 0 }}
+            animate={{ x: [0, -width] }}
+            transition={{
+                duration: duration, // Slow down on hover
+                ease: 'linear',
+                repeat: Infinity,
+            }}
+        >
+            <div
+                className={`flex flex-row items-center h-full ps-2`}
+                style={{ width: `${totalWidth}px` }}
+            >
+                {Array.from({ length: 6 }).map((_, i) =>
+                    skills.map((skill) => (
+                        <motion.div
+                            key={`${skill.id}-${i}`}
+                            className="h-32 w-32 flex-shrink-0 m-2 bg-white p-4 rounded-lg relative"
+                        >
+                            <img
+                                src={skill.image}
+                                alt={`Skill ${skill.id}`}
+                                className="w-full h-full object-cover"
+                            />
+                            <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 opacity-0 hover:opacity-100 transition-opacity rounded-lg">
+                                <span className="text-white text-md font-bold">{skill.name}</span>
+                            </div>
+                        </motion.div>
+                    ))
+                )}
+            </div>
+        </motion.div>
     );
-  };
+};
 
 export default function SkillCategory() {
     return (
-        <div className="grid grid-cols-2 ">
-                {renderSkillCategory("Programming", programming)}
-                {renderSkillCategory("General software", general)}
-                {renderSkillCategory("Back-end", backEnd)}
-                {renderSkillCategory("CAD-FEA-CFD", CAD)}
-                {renderSkillCategory("Front-end", frontEnd)}
-                {renderSkillCategory("3D-print", print)}
+
+        <div className='w-full'>
+            <div className="w-full h-40 bg-teal-100 rounded-3xl flex mt-8">
+                <div className='w-[520px] flex justify-center items-center'>
+                    <div className='flex justify-center items-center bg-zinc-100 p-4 rounded-lg '>
+                        <h1 className="text-4xl font-bold text-black">Programming</h1>
+                    </div>
+
+                </div>
+                <div className='bg-gradient-to-b from-pink-100 to-purple-100 w-full h-full rounded-3xl overflow-hidden'>
+                    <div className='w-[3000px] h-full'>
+                        {renderSkills(programming)}
+                    </div>
+                </div>
+            </div>
+            <div className="w-full h-40 bg-teal-100 rounded-3xl flex mt-8">
+                <div className='bg-gradient-to-b from-purple-100 to-indigo-100 w-full h-full rounded-3xl overflow-hidden'>
+                    <div className='w-[3000px] h-full'>
+                        {renderSkills(development)}
+                    </div>
+                </div>
+                <div className='w-[520px] flex justify-center items-center'>
+                    <div className='flex justify-center items-center bg-zinc-100 p-4 rounded-lg '>
+                        <h1 className="text-4xl font-bold text-black">Development</h1>
+                    </div>
+                </div>
+            </div>
+
+            <div className="w-full h-40 bg-teal-100 rounded-3xl flex mt-8">
+                <div className='w-[520px] flex justify-center items-center'>
+                    <div className='flex justify-center items-center bg-zinc-100 p-4 rounded-lg '>
+                        <h1 className="text-4xl font-bold text-black">CAD/FEA/CFD</h1>
+                    </div>
+                </div>
+                <div className='bg-gradient-to-b from-indigo-100 to-sky-100 w-full h-full rounded-3xl overflow-hidden'>
+                    <div className='w-[3000px] h-full'>
+                        {renderSkills(CAD)}
+                    </div>
+                </div>
+            </div>
+
+            <div className="w-full h-40 bg-teal-100 rounded-3xl flex mt-8">
+                <div className='bg-gradient-to-b from-sky-100 to-teal-100 w-full h-full rounded-3xl overflow-hidden'>
+                    <div className='w-[3000px] h-full'>
+                        {renderSkills(general)}
+                    </div>
+                </div>
+                <div className='w-[520px] flex justify-center items-center'>
+                    <div className='flex justify-center items-center bg-zinc-100 p-4 rounded-lg '>
+                        <h1 className="text-4xl font-bold text-black">General</h1>
+                    </div>
+                </div>
+            </div>
         </div>
+
     );
 }
 
@@ -90,40 +170,22 @@ const programming = [
         image:
             "../SkillLogos/maple.png",
     },
-];
-
-
-const backEnd = [
     {
-        id: 1,
+        id: 8,
         name: "SQL",
         designation: "",
         image:
             "../SkillLogos/sql.jpg",
     },
     {
-        id: 2,
+        id: 9,
         name: "postgresql",
         designation: "",
         image:
             "../SkillLogos/postgres.png",
     },
     {
-        id: 3,
-        name: "Databricks",
-        designation: "",
-        image:
-            "../SkillLogos/databricks.png",
-    },
-    {
-        id: 4,
-        name: "Palantir",
-        designation: "",
-        image:
-            "../SkillLogos/palantir.png",
-    },
-    {
-        id: 5,
+        id: 10,
         name: "Git",
         designation: "",
         image:
@@ -131,7 +193,8 @@ const backEnd = [
     },
 ];
 
-const frontEnd = [
+
+const development = [
     {
         id: 1,
         name: "HTML",
@@ -173,6 +236,20 @@ const frontEnd = [
         designation: "",
         image:
             "../SkillLogos/powerbi.jpg",
+    },
+    {
+        id: 7,
+        name: "Databricks",
+        designation: "",
+        image:
+            "../SkillLogos/databricks.png",
+    },
+    {
+        id: 8,
+        name: "Palantir",
+        designation: "",
+        image:
+            "../SkillLogos/palantir.png",
     },
 ];
 
@@ -259,43 +336,40 @@ const CAD = [
         image:
             "../SkillLogos/ansys.png",
     },
-];
-
-
-const print = [
     {
-        id: 1,
+        id: 7,
         name: "Cura",
         designation: "",
         image:
             "../SkillLogos/cura.png",
     },
     {
-        id: 2,
+        id: 8,
         name: "Bambu lab",
         designation: "",
         image:
             "../SkillLogos/bambulab.webp",
     },
     {
-        id: 3,
+        id: 9,
         name: "Prusa slicer",
         designation: "",
         image:
             "../SkillLogos/prusa.png",
     },
     {
-        id: 4,
+        id: 10,
         name: "Orca slicer",
         designation: "",
         image:
             "../SkillLogos/orca.png",
     },
     {
-        id: 5,
+        id: 11,
         name: "Autodesk Netfabb",
         designation: "",
         image:
             "../SkillLogos/netfabb.jpg",
     },
 ];
+

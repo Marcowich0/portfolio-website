@@ -52,7 +52,7 @@ const links = [
 
 export default function Navbar() {
     return (
-        <div className="flex items-center justify-center  z-50" style={{ position: 'fixed', bottom: '80px' , left: '50%', transform: 'translateX(-50%)' }}>
+        <div className="flex items-center justify-center z-50" style={{ position: 'fixed', bottom: '40px' , left: '50%', transform: 'translateX(-50%)' }}>
         <FloatingDock
           items={links}
         />

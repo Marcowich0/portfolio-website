@@ -34,9 +34,9 @@ export const LayoutGrid = ({ cards }: { cards: Card[] }) => {
             onClick={() => handleClick(card)}
             className={cn(
               card.className,
-              "relative overflow-hidden",
+              "relative overflow-hidden cursor-pointer hover:scale-[102%]",
               selected?.id === card.id
-                ? "rounded-lg cursor-pointer absolute inset-0 h-1/2 w-full md:w-1/2 m-auto z-50 flex justify-center items-center flex-wrap flex-col"
+                ? "rounded-lg absolute inset-0 h-1/2 w-full md:w-1/2 m-auto z-50 flex justify-center items-center flex-wrap flex-col"
                 : lastSelected?.id === card.id
                 ? "z-40 bg-white rounded-xl h-full w-full"
                 : "bg-white rounded-xl h-full w-full"
@@ -46,7 +46,9 @@ export const LayoutGrid = ({ cards }: { cards: Card[] }) => {
             {selected?.id === card.id && <SelectedCard selected={selected} />}
             <ImageComponent card={card} />
             {card !== selected ? (
-                <h1 className="text-white text-3xl font-bold absolute" style={{bottom: "10px", left: "10px"}}>{card.headline}</h1>
+                <div className="absolute bottom-2 left-2 bg-zinc-800 flex items-center justify-center p-2 rounded-lg">
+                <h1 className="text-zinc-200 text-md font-bold">{card.headline}</h1>
+              </div>
               ) : null}
           </motion.div>
         </div>
@@ -54,7 +56,7 @@ export const LayoutGrid = ({ cards }: { cards: Card[] }) => {
       <motion.div
         onClick={handleOutsideClick}
         className={cn(
-          "absolute h-full w-full left-0 top-0 bg-black opacity-0 z-10",
+          "absolute h-full w-full left-0 top-0  opacity-0 z-10",
           selected?.id ? "pointer-events-auto" : "pointer-events-none"
         )}
         animate={{ opacity: selected?.id ? 0.3 : 0 }}

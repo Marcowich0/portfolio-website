@@ -9,16 +9,20 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@react-three/drei": "^9.112.0",
+    "@react-three/fiber": "^8.17.7",
     "@tabler/icons-react": "^3.12.0",
     "clsx": "^2.1.1",
     "framer-motion": "^11.3.24",
     "luxon": "^3.5.0",
-    "next": "14.2.5",
+    "next": "^14.2.12",
     "react": "^18",
     "react-dom": "^18",
     "react-intersection-observer": "^9.13.0",
     "simplex-noise": "^4.0.3",
+    "tabler-icons-react": "^1.56.0",
     "tailwind-merge": "^2.4.0",
+    "three": "^0.168.0",
     "zustand": "^4.5.5"
   },
   "devDependencies": {
