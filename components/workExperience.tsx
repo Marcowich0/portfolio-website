@@ -82,8 +82,10 @@ export default function WorkExperience() {
                     {hoveredIndex && (
                         <div className='w-full h-full relative'>
                             <motion.div
-                                className='w-[650px] h-[300px] z-[9999] absolute flex justify-between p-4 rounded-2xl border-2 border-zinc-500 bg-zinc-100'
-                                style={{ left: '50%', top: `${hoveredPosition ? hoveredPosition.top : 0}px` }}
+                                className='w-[650px] h-[300px] z-[9999] fixed flex justify-between p-4 rounded-2xl border-2 border-zinc-500 bg-zinc-100'
+                                style={{ 
+                                    left: `${hoveredPosition ? hoveredPosition.left + hoveredPosition.width/2 : 0}px`, 
+                                    top:  `${hoveredPosition ? hoveredPosition.top - 332 : 0}px` }}
                                 initial={{ opacity: 0, scale: 0, x: '-50%', y: "160px" }}
                                 animate={{ opacity: 1, scale: 1, y: 0 }}
                                 exit={{ opacity: 0, scale: 0, x: '-50%', y: "160px" }}
@@ -135,6 +137,8 @@ export default function WorkExperience() {
                                     }
                                     if (experienceRefs.current[index] && hoveredIndex !== exp.id) {
                                         const position = experienceRefs.current[index].getBoundingClientRect();
+                                        const offsetParentRect = experienceRefs.current[index]?.offsetParent?.getBoundingClientRect();
+                                        console.log(offsetParentRect);
                                         setHoveredPosition(position);
                                         console.log(hoveredPosition);
                                     }
