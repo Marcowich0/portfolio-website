@@ -1,7 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 
-export default function FlippingCard() {
+
+interface CardProps {
+  imgSrc: string;
+  delay: number;
+}
+
+const Card: React.FC<CardProps> = ({ imgSrc, delay }) => {
   const [isFlipped, setIsFlipped] = useState(false);
 
   useEffect(() => {
@@ -13,28 +19,40 @@ export default function FlippingCard() {
   }, []);
 
   return (
-    <div className="w-full h-[500px] mt-8 grid grid-cols-3 gap-8 overflow-hidden">
+    <div className="w-full h-[500px] mt-8 overflow-hidden">
       <motion.div
         className="relative flex justify-center items-center h-full rounded-2xl shadow-md border-[6px] border-zinc-300"
         animate={{ rotateY: isFlipped ? 180 : 0 }}
-        transition={{ duration: 1 }}
+        transition={{ duration: 2, delay: delay }}
         style={{ perspective: 1000 }}
       >
 
         <motion.div
           className="absolute h-2/3 w-2/3 flex justify-center items-center"
           animate={{ rotateY: isFlipped ? 180 : 0 }}
-          transition={{ duration: 1 }}
+          transition={{ duration: 2, delay: delay }}
           style={{ perspective: 1000 }}
         >
           <img
-            src="experienceLogos/dtu.png"
+            src={imgSrc}
             alt="DTU logo"
             className="h-full w-full object-contain"
           />
         </motion.div>
 
       </motion.div>
+      
     </div>
   );
+}
+
+export default function FlippingCard() {
+  
+  return(
+    <div className='w-full h-full grid grid-cols-3 gap-8'>
+      <Card imgSrc="experienceLogos/dtu.png" delay={0.4} />
+      <Card imgSrc="experienceLogos/dtu.png" delay={0.8} />
+      <Card imgSrc="experienceLogos/dtu.png" delay={1.2} />
+    </div>
+  )
 }
