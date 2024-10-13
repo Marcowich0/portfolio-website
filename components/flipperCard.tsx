@@ -29,7 +29,7 @@ const Card: React.FC<CardProps> = ({ imgSrc, delay, onClick }) => {
   }, []);
 
   return (
-    <div className="w-full h-[500px] overflow-hidden" onClick={onClick}>
+    <div className="w-full h-[400px] overflow-hidden" onClick={onClick}>
       <motion.div
         className="relative flex justify-center items-center h-full rounded-2xl shadow-md border-[6px] border-zinc-300 cursor-pointer"
         animate={{ rotateY: isFlipped ? 180 : 0 }}

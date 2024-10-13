@@ -8,9 +8,9 @@ import AnimatedHeadline from "@/components/AnimatedHeadline";
 import SkillCategory from "@/components/SkillCategory";
 import WorkExperience from "@/components/workExperience";
 import Navbar from "@/components/navbar";
+import HobbyFrames from "@/components/hobbyFrames";
 import HobbyTiles from "@/components/Hobbies";
 import AnimatedProjects from "@/components/animatedProjects";
-import ContactMe from "@/components/ContactMe";
 import FlippingCard from "@/components/flipperCard";
 
 import BackPage from "@/components/backPage";
@@ -111,11 +111,11 @@ export default function Home() {
         >
           <AnimatedHeadline title="Work Experience" />
 
-          <motion.div className="mb-4">
+          <motion.div className="mb-12">
             <h4 className={smallHeadLineClassName}> I have been working since my early teens, here is a quick overview of the companies i have contribuated to</h4>
           </motion.div>
 
-          <div className="w-full h-[500px] mt-8 p-16 border-[6px] rounded-2xl border-zinc-300 overflow-visible ">
+          <div className="w-full h-[500px] p-16 border-[6px] rounded-2xl border-zinc-300 overflow-visible ">
             <WorkExperience />
           </div>
 
@@ -131,7 +131,7 @@ export default function Home() {
         >
           <AnimatedHeadline title="Education" />
 
-          <motion.div className="mb-4">
+          <motion.div className="mb-12">
             <h4 className={smallHeadLineClassName}> I have been working since my early teens, here is a quick overview of the companies i have contribuated to</h4>
           </motion.div>
 
@@ -196,8 +196,8 @@ export default function Home() {
             <h4 className={smallHeadLineClassName}> Here is a quick overview of how i spend my spare time, click the images for more information!</h4>
           </motion.div>
 
-          <motion.div className="w-full h-[800px] mt-8 mb-48">
-            <HobbyTiles />
+          <motion.div className="w-full h-[800px] mt-16 mb-48">
+            <HobbyFrames />
           </motion.div>
 
         </div>
