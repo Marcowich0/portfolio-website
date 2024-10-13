@@ -83,7 +83,8 @@ export default function SkillCategory() {
                                     <h1 className="text-black font-bold text-md">{skill.name}</h1>
                                     <h1 className="text-black font-bold">{skillLevelName(skill.level)}</h1>
                                 </div>
-                                {skillBar(skill.level, animate)}
+                                {skillBar(skill.level, isInView)}
+                                
                             </div>
                         </div>
                     ))}

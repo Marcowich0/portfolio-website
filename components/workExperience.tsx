@@ -17,6 +17,7 @@ const monthSpacing = 2;
 const totalDuration = 4;
 
 export default function WorkExperience() {
+
     const ref = useRef(null);
     const isInView = useInView(ref, { once: true });
 
@@ -85,9 +86,10 @@ export default function WorkExperience() {
                         <div className='w-full h-full relative'>
                             <motion.div
                                 className='w-[650px] h-[300px] z-[9999] fixed flex justify-between p-4 rounded-2xl border-2 border-zinc-500 bg-zinc-100'
-                                style={{ 
-                                    left: `${hoveredPosition ? hoveredPosition.left + hoveredPosition.width/2 : 0}px`, 
-                                    top:  `${hoveredPosition ? hoveredPosition.top - 332 : 0}px` }}
+                                style={{
+                                    left: `${hoveredPosition ? hoveredPosition.left + hoveredPosition.width / 2 : 0}px`,
+                                    top: `${hoveredPosition ? hoveredPosition.top - 332 : 0}px`
+                                }}
                                 initial={{ opacity: 0, scale: 0, x: '-50%', y: "160px" }}
                                 animate={{ opacity: 1, scale: 1, y: 0 }}
                                 exit={{ opacity: 0, scale: 0, x: '-50%', y: "160px" }}
@@ -131,7 +133,7 @@ export default function WorkExperience() {
                             key={uuidv4()}>
                             <div
                                 key={uuidv4()}
-                                ref={(el) => {(experienceRefs.current[index] = el)}}
+                                ref={(el) => { (experienceRefs.current[index] = el) }}
                                 onMouseEnter={() => {
                                     if (hoveredIndex !== exp.id) {
                                         setHoveredIndex(exp.id);
@@ -146,7 +148,7 @@ export default function WorkExperience() {
                                 }}
                                 onMouseLeave={() => {
                                     setHoveredIndex(null);
-                                    }}
+                                }}
 
                                 className="relative h-12 rounded-full flex flex-row items-center ps-1 bg-gradient-to-r from-teal-400 to-cyan-400 border-2 border-zinc-400 overflow-hidden"
                             >

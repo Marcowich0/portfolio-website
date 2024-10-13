@@ -1,8 +1,9 @@
 'use client';
 
-import React, { use, useState, useEffect } from "react";
+import React, { use, useState, useEffect, useRef } from "react";
 /* ------------ Import aceternity components ------------- */
 
+import FrontPage from "@/components/frontPage";
 import AnimatedHeadline from "@/components/AnimatedHeadline";
 import SkillCategory from "@/components/SkillCategory";
 import WorkExperience from "@/components/workExperience";
@@ -12,45 +13,101 @@ import AnimatedProjects from "@/components/animatedProjects";
 import ContactMe from "@/components/ContactMe";
 import FlippingCard from "@/components/flipperCard";
 
+import BackPage from "@/components/backPage";
+
 import { motion } from 'framer-motion';
 
 export default function Home() {
 
   const smallHeadLineClassName = "text-black opacity-80 text-lg font-bold -mt-6"
 
+  const elementRef = useRef<HTMLDivElement>(null);
+  const [mainPageHeight, setMainPageHeight] = useState(0);
+  const [frontPagelag, setFrontPagelag] = useState(0);
+  const frontPagelagRef = useRef(frontPagelag);
+  const [isSticky, setIsSticky] = useState(false);
+  const [fixedPosition, setFixedPosition] = useState("0px");
+  const [totalHeight, setTotalHeight] = useState(0);
+
+  useEffect(() => {
+    // Set the initial values for frontPagelag and mainPageHeight
+    setFrontPagelag(window.innerHeight + 200);
+    setMainPageHeight(elementRef.current ? elementRef.current.getBoundingClientRect().height : 0);
+    
+    // Reset scroll position to top on page refresh
+    window.scrollTo(0, 0);
+  }, []);
+
+  useEffect(() => {
+    // Update the ref whenever frontPagelag changes
+    frontPagelagRef.current = frontPagelag;
+    setTotalHeight(mainPageHeight + frontPagelag + window.innerHeight + 200);
+  }, [frontPagelag]);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY < frontPagelagRef.current) {
+        setIsSticky(true);
+        setFixedPosition("0px");
+      } else if (window.scrollY > frontPagelagRef.current && window.scrollY < mainPageHeight + 200) {
+        setIsSticky(false);
+        setFixedPosition(`${frontPagelagRef.current}px`);
+      }
+      else if (window.scrollY > mainPageHeight + 200) {
+        setIsSticky(true);
+        setFixedPosition(`${-mainPageHeight + window.innerHeight}px`);
+      }
+      console.log("logs")
+      console.log("scrollY", window.scrollY)
+      console.log("frontPagelag", frontPagelag)
+      console.log("mainPageHeight", mainPageHeight)
+      console.log("isSticky", isSticky)
+      console.log("fixedPosition", fixedPosition)
+      };
+
+      
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, [isSticky, fixedPosition, mainPageHeight]);
+
+  
+
   return (
-    <main className="flex flex-col items-center overflow-hidden scroll-smooth" style={{ background: '#FBFBFB', scrollBehavior: "smooth" }}>
+    <main className="flex flex-col items-center overflow-hidden scroll-smooth bg-white" style={{ background: '#FBFBFB', scrollBehavior: "smooth" }}>
 
       {/* --------------------- Landing page -------------------- */}
-
       <div id="home"></div>
-      <div className="w-screen h-screen bg-slate-500 z-[60]"
-        style={{
-          backgroundImage: `url("/mechanical_engineering.jpeg")`,
-          backgroundSize: "cover", // Adjust as needed
-          backgroundPosition: "center", // Adjust as needed
-        }}>
+      <FrontPage />
+      <BackPage elementHeight={mainPageHeight + frontPagelag + 200} />
 
-        <div className="bottom-0 left-0 absolute p-12 flex flex-col">
-          <h1 className="text-white font-bold -my-4 -ms-2 text-[120px] 2xl:text-[180px]" >Marc Clausen</h1>
-          <h1 className="text-white font-bold -my-4 text-[50px] 2xl:text-[70px]">Mechanical Engineer</h1>
-        </div>
+      {/* --------------------- Contact me -------------------- */}
 
-      </div>
 
-      <div className="overflow-x-visible w-[60%] " style={{
+
+      {/* --------------------- layout of scrollable section -------------------- */}
+      <div style={{
+        height: `${totalHeight}px`,
+        opacity: 0,
+      }} />
+
+      <div className="overflow-x-visible w-[60%]" style={{
         scrollBehavior: "smooth",
-      }}>
-
+        position: isSticky ? "fixed" : "absolute",
+        top: fixedPosition,
+      }}
+        ref={elementRef}>
         <Navbar />
-
 
         {/* --------------------- Experience -------------------- */}
 
         <div id="experience"></div>
 
         <motion.div
-          className="snap-start flex flex-col items-center w-full h-full overflow-visible mt-16"
+          className="snap-start flex flex-col items-center w-full h-full overflow-visible mt-24"
         >
           <AnimatedHeadline title="Work Experience" />
 
@@ -58,7 +115,7 @@ export default function Home() {
             <h4 className={smallHeadLineClassName}> I have been working since my early teens, here is a quick overview of the companies i have contribuated to</h4>
           </motion.div>
 
-          <div className="w-full h-[500px] mt-8 p-16 border-[6px] rounded-2xl border-zinc-300 overflow-visible mb-8">
+          <div className="w-full h-[500px] mt-8 p-16 border-[6px] rounded-2xl border-zinc-300 overflow-visible ">
             <WorkExperience />
           </div>
 
@@ -70,7 +127,7 @@ export default function Home() {
         <div id="education"></div>
 
         <motion.div
-          className="snap-start flex flex-col items-center w-full h-full overflow-visible mt-16"
+          className="snap-start flex flex-col items-center w-full h-full overflow-visible mt-24"
         >
           <AnimatedHeadline title="Education" />
 
@@ -91,14 +148,14 @@ export default function Home() {
 
         <div id="projects"></div>
         <div
-          className="snap-start flex flex-col items-center w-full h-full "
+          className="snap-start flex flex-col items-center w-full h-full mt-24"
         >
           <AnimatedHeadline title="Projects" />
           <motion.div >
             <h4 className={smallHeadLineClassName}> I do personal projects all the time, here is a few notable ones as long with some from my studies</h4>
           </motion.div>
 
-          <div className="w-full h-full mt-12 mb-12">
+          <div className="w-full h-full mt-12">
             <AnimatedProjects />
           </div>
 
@@ -109,7 +166,7 @@ export default function Home() {
 
         <div id="skills"></div>
         <div
-          className="snap-start flex flex-col items-center w-full h-full "
+          className="snap-start flex flex-col items-center w-full h-full mt-24"
         >
           <AnimatedHeadline title="Skills" />
 
@@ -117,7 +174,7 @@ export default function Home() {
             <h4 className={smallHeadLineClassName}> Through Work, School and spare time projects, i gained experience in a veriety of programs and languages. Here is a quick categorized overview</h4>
           </motion.div>
 
-          <div className="w-full h-full mt-8 mb-12">
+          <div className="w-full h-full mt-12">
             <SkillCategory />
           </div>
 
@@ -131,7 +188,7 @@ export default function Home() {
 
         <div id="hobies"></div>
         <div
-          className="snap-start flex flex-col items-center w-full h-full "
+          className="snap-start flex flex-col items-center w-full h-full mt-24"
         >
           <AnimatedHeadline title="Hobbies" />
 
@@ -139,32 +196,10 @@ export default function Home() {
             <h4 className={smallHeadLineClassName}> Here is a quick overview of how i spend my spare time, click the images for more information!</h4>
           </motion.div>
 
-          <motion.div className="w-full h-[800px] mt-8 mb-64">
+          <motion.div className="w-full h-[800px] mt-8 mb-48">
             <HobbyTiles />
           </motion.div>
 
-        </div>
-
-
-
-
-
-      </div>
-
-      <div id="contact"></div>
-      <div className="w-screen h-screen bg-slate-500 z-[60] flex justify-center items-center"
-        style={{
-          backgroundImage: `url("/mechanical_engineering.jpeg")`,
-          backgroundSize: "cover", // Adjust as needed
-          backgroundPosition: "center", // Adjust as needed
-        }}>
-
-
-        <div className="bg-white border-[6px] border-zinc-300 rounded-2xl px-16 pb-16">
-          <AnimatedHeadline title="Contact me" />
-          <div className="w-[1400px] h-[600px]  flex flex-col ">
-            <ContactMe />
-          </div>
         </div>
 
 
