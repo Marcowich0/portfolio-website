@@ -29,11 +29,12 @@ export default function Home() {
   const [fixedPosition, setFixedPosition] = useState("0px");
   const [totalHeight, setTotalHeight] = useState(0);
 
+
   useEffect(() => {
     // Set the initial values for frontPagelag and mainPageHeight
     setFrontPagelag(window.innerHeight + 200);
     setMainPageHeight(elementRef.current ? elementRef.current.getBoundingClientRect().height : 0);
-    
+
     // Reset scroll position to top on page refresh
     window.scrollTo(0, 0);
   }, []);
@@ -57,15 +58,9 @@ export default function Home() {
         setIsSticky(true);
         setFixedPosition(`${-mainPageHeight + window.innerHeight}px`);
       }
-      console.log("logs")
-      console.log("scrollY", window.scrollY)
-      console.log("frontPagelag", frontPagelag)
-      console.log("mainPageHeight", mainPageHeight)
-      console.log("isSticky", isSticky)
-      console.log("fixedPosition", fixedPosition)
-      };
+    };
 
-      
+
 
     window.addEventListener("scroll", handleScroll);
 
@@ -74,10 +69,10 @@ export default function Home() {
     };
   }, [isSticky, fixedPosition, mainPageHeight]);
 
-  
+
 
   return (
-    <main className="flex flex-col items-center overflow-hidden scroll-smooth bg-white" style={{ background: '#FBFBFB', scrollBehavior: "smooth" }}>
+    <main className="flex flex-col items-center overflow-hidden scroll-smooth bg-white" style={{ background: '#FBFBFB' }}>
 
       {/* --------------------- Landing page -------------------- */}
       <div id="home"></div>
