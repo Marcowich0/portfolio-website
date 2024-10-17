@@ -17,7 +17,11 @@ const yearSpacing = 2;
 const monthSpacing = 2;
 const totalDuration = 4;
 
-export default function WorkExperience() {
+interface WorkExperienceProps {
+    animate: boolean;
+  }
+
+export default function WorkExperience({ animate }: WorkExperienceProps) {
 
     const ref = useRef(null);
     const isInView = useInView(ref, { once: true });
@@ -125,7 +129,7 @@ export default function WorkExperience() {
 
                     <motion.div className="absolute top-14 w-full h-auto flex flex-col space-y-6 mt-3 overflow-visible"
                         initial={{ clipPath: 'inset(0 100% 0 0)' }}
-                        animate={isInView ? { clipPath: 'inset(0 0 0 0)' } : {}}
+                        animate={(isInView && animate) ? { clipPath: 'inset(0 0 0 0)' } : {}}
                         transition={{ duration: totalDuration, ease: "linear" }}
                         ref={ref}
                     >

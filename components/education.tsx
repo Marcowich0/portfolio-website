@@ -111,30 +111,40 @@ export default function FlippingCard() {
       <AnimatePresence>
         {chosenEducation && popupPosition && (
           <motion.div
-            className="bg-zinc-50 rounded-2xl border-zinc-500 border-4 absolute z-[60] cursor-pointer flex flex-row justify-between"
+            className="bg-zinc-50 rounded-2xl border-zinc-500 border-4 absolute z-[60] cursor-pointer flex flex-col"
             initial={{ x: popupPosition.x, y: popupPosition.y, width: popupPosition.width, height: popupPosition.height, opacity: 0 }}
             animate={{ width: '900px', height: '500px', left: '50%', top: '50%', transform: 'translate(-50%, -50%)', opacity: 1 }}
             exit={{ x: popupPosition.x, y: popupPosition.y, width: popupPosition.width, height: popupPosition.height, opacity: 0 }}
             transition={{ duration: 0.3 }}
             onClick={() => setChosenEducation(null)}
           >
+
             <div className="p-8 flex flex-row w-full">
               <div className='flex flex-col items-start w-2/3'>
                 <h1 className='text-black font-bold text-3xl'>{chosenEducation.title}</h1>
                 <h2 className='text-red-600 font-bold text-xl opacity-80 mt-2'>{chosenEducation.subtitle}</h2>
               </div>
               <div className='flex flex-col w-1/3 items-end'>
-                <h1 className='text-black font-bold text-2xl opacity-80'>{chosenEducation.year}</h1>
+                <h1 className='text-black font-bold text-3xl opacity-80'>{chosenEducation.year}</h1>
                 <h2 className='text-black font-bold text-xl opacity-60 mt-2'>{chosenEducation.location}</h2>
               </div>
             </div>
-            <div className="w-[350px] h-full py-8 pe-8 flex justify-center items-center">
-              <div className='w-full h-full bg-white rounded-xl flex justify-center items-center p-4'>
+
+            <div className='w-full h-full flex flex-row p-4'>
+
+              <div className='w-full h-full'>
+
+              </div>
+
+              <div className='w-[350px] h-full rounded-xl flex justify-center items-center p-4 ms-4 bg-white border-4 border-zinc-300'>
                 <div className='relative w-full h-full'>
                   <Image src={`/experienceLogos/${chosenEducation.img}`} alt="education" fill style={{ objectFit: "contain" }} />
                 </div>
               </div>
+
             </div>
+
+
 
             <div className='w-screen h-screen z-[70] opacity-0 absolute cursor-default'
               style={{ top: "50%", left: "50%", transform: "translate(-50%,-50%)" }}

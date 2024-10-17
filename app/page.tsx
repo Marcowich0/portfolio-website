@@ -10,7 +10,7 @@ import WorkExperience from "@/components/workExperience";
 import Navbar from "@/components/navbar";
 import HobbyFrames from "@/components/hobbyFrames";
 import AnimatedProjects from "@/components/animatedProjects";
-import FlippingCard from "@/components/flipperCard";
+import FlippingCard from "@/components/education";
 
 import BackPage from "@/components/backPage";
 
@@ -27,6 +27,7 @@ export default function Home() {
   const [isSticky, setIsSticky] = useState(false);
   const [fixedPosition, setFixedPosition] = useState("0px");
   const [totalHeight, setTotalHeight] = useState(0);
+  const [animateWorkExperience, setAnimateWorkExperience] = useState(false);
 
   const lag = 200;
 
@@ -40,13 +41,26 @@ export default function Home() {
   }, []);
 
   useEffect(() => {
-    // Update the ref whenever frontPagelag changes
-    frontPagelagRef.current = frontPagelag;
-    setTotalHeight(mainPageHeight + frontPagelag + window.innerHeight + lag);
-  }, [frontPagelag, mainPageHeight]);
+    const updateHeights = () => {
+      frontPagelagRef.current = frontPagelag;
+      setTotalHeight(mainPageHeight + frontPagelag + window.innerHeight + lag);
+    };
+
+    // Initial update
+    updateHeights();
+
+    // Add event listener for resize
+    window.addEventListener('resize', updateHeights);
+
+    // Clean up event listener on component unmount
+    return () => window.removeEventListener('resize', updateHeights);
+  }, [frontPagelag, mainPageHeight, lag]);
 
   useEffect(() => {
     const handleScroll = () => {
+      if (window.scrollY > 200) {
+        setAnimateWorkExperience(true);
+      }
       if (window.scrollY < frontPagelagRef.current) {
         setIsSticky(true);
         setFixedPosition("0px");
@@ -109,7 +123,7 @@ export default function Home() {
             <h4 className={smallHeadLineClassName}> I have been working since my early teens, here is a quick overview of the companies i have contribuated to</h4>
           </motion.div>
 
-          <WorkExperience />
+          <WorkExperience animate={animateWorkExperience}/>
 
         </motion.div>
 

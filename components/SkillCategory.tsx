@@ -75,8 +75,8 @@ export default function SkillCategory() {
                 <div className="border-[6px] border-zinc-300 rounded-2xl mb-4" key={uuidv4()} style={{ breakInside: "avoid" }}>
                     <h1 className="text-3xl font-bold text-black text-center my-6">{skillNames[index]}</h1>
                     {skills.map((skill) => (
-                        <div key={skill.id} className="h-16 m-4 rounded-lg flex flex-row">
-                            <div className='flex justify-center items-center w-20 h-16 rounded-lg overflow-hidden border-2 border-zinc-200 bg-white'>
+                        <div key={skill.id} className="h-12 m-4 rounded-lg flex flex-row">
+                            <div className='flex justify-center items-center w-14 h-12 rounded-lg overflow-hidden border-2 border-zinc-200 bg-white'>
                                 <div className='relative w-full h-full'>
                                     <Image src={`/SkillLogos/${skill.image}`} alt={skill.name} fill style={{ objectFit: 'cover' }} />
                                 </div>
