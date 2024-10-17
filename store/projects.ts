@@ -35,7 +35,6 @@ fetch(dataUrl)
   .then(res => res.json())
   .then((data: project[]) => {
     useProjects.getState().setProjects(data);
-    console.log(useProjects.getState().projects);
   });
 
 

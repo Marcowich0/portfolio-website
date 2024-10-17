@@ -1,4 +1,5 @@
 import React from 'react';
+import Image from 'next/image';
 import { MapPin, Mail, BrandGithub, BrandLinkedin, Books } from 'tabler-icons-react';
 
 
@@ -42,8 +43,10 @@ export default function ContactMe() {
                 ))}
 
             </div>
-            <div className='w-1/3 h-full'>
-                <img src="/DSE 2022.jpg" alt="contact me" className="w-full h-full object-cover rounded-2xl" />
+            <div className='w-1/3 h-full rounded-2xl overflow-hidden'>
+                <div className='relative w-full h-full'>
+                    <Image src="/DSE 2022.jpg" alt="contact me" fill style={{ objectFit:"cover" }} />
+                </div>
             </div>
             <div className='flex justify-center items-center absolute bottom-0'>
                 <a href="/Marc_Clausen_Resume.pdf" download className="w-[400px] h-24  flex justify-center items-center bg-zinc-700 text-white text-4xl font-bold rounded-2xl transition duration-200 hover:bg-teal-600">

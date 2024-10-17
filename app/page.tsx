@@ -28,10 +28,11 @@ export default function Home() {
   const [fixedPosition, setFixedPosition] = useState("0px");
   const [totalHeight, setTotalHeight] = useState(0);
 
+  const lag = 500;
 
   useEffect(() => {
     // Set the initial values for frontPagelag and mainPageHeight
-    setFrontPagelag(window.innerHeight + 200);
+    setFrontPagelag(window.innerHeight + lag);
     setMainPageHeight(elementRef.current ? elementRef.current.getBoundingClientRect().height : 0);
 
     // Reset scroll position to top on page refresh
@@ -41,19 +42,19 @@ export default function Home() {
   useEffect(() => {
     // Update the ref whenever frontPagelag changes
     frontPagelagRef.current = frontPagelag;
-    setTotalHeight(mainPageHeight + frontPagelag + window.innerHeight + 200);
-  }, [frontPagelag]);
+    setTotalHeight(mainPageHeight + frontPagelag + window.innerHeight + lag);
+  }, [frontPagelag, mainPageHeight]);
 
   useEffect(() => {
     const handleScroll = () => {
       if (window.scrollY < frontPagelagRef.current) {
         setIsSticky(true);
         setFixedPosition("0px");
-      } else if (window.scrollY > frontPagelagRef.current && window.scrollY < mainPageHeight + 200) {
+      } else if (window.scrollY > frontPagelagRef.current && window.scrollY < mainPageHeight + lag) {
         setIsSticky(false);
         setFixedPosition(`${frontPagelagRef.current}px`);
       }
-      else if (window.scrollY > mainPageHeight + 200) {
+      else if (window.scrollY > mainPageHeight + lag) {
         setIsSticky(true);
         setFixedPosition(`${-mainPageHeight + window.innerHeight}px`);
       }
@@ -108,9 +109,7 @@ export default function Home() {
             <h4 className={smallHeadLineClassName}> I have been working since my early teens, here is a quick overview of the companies i have contribuated to</h4>
           </motion.div>
 
-          <div className="w-full h-[500px] p-16 border-[6px] rounded-2xl border-zinc-300 overflow-visible ">
-            <WorkExperience />
-          </div>
+          <WorkExperience />
 
         </motion.div>
 

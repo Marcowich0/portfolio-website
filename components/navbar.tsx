@@ -1,22 +1,14 @@
 import { FloatingDock } from "@/components/ui/floating-dock";
 import {
-  IconHome,
   IconBriefcase,
   IconHammer,
   IconTerminal2,
   IconChess,
-  IconMail
+  IconSchool
 } from "@tabler/icons-react";
 
 const iconClassname = "h-full w-full text-neutral-500 dark:text-neutral-300";
 const links = [
-    {
-      title: "Home",
-      icon: (
-        <IconHome className={iconClassname} />
-      ),
-      href: "#home",
-    },
 
     {
       title: "Work Experience",
@@ -24,6 +16,13 @@ const links = [
         <IconBriefcase className={iconClassname} />
       ),
       href: "#experience",
+    },
+    {
+      title: "Education",
+      icon: (
+        <IconSchool className={iconClassname} />
+      ),
+      href: "#education",
     },
     {
       title: "Projects",
@@ -46,18 +45,9 @@ const links = [
         <IconChess className={iconClassname} />
       ),
       href: "#hobies",
-    },
-    {
-      title: "Contact me",
-      icon: (
-        <IconMail className={iconClassname} />
-      ),
-      href: "#contact",
-    },
-
+    }
     
   ];
-
 
 export default function Navbar() {
     return (

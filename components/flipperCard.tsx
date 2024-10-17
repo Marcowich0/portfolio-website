@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
+import Image from 'next/image';
 
 interface CardProps {
   imgSrc: string;
@@ -45,7 +46,7 @@ const Card: React.FC<CardProps> = ({ imgSrc, delay, onClick }) => {
   };
 
   return (
-    <div className="w-full h-[400px] overflow-hidden" ref={cardRef} onClick={handleClick}>
+    <div className="w-full h-[400px] overflow-hidden transform transition-transform duration-200 hover:scale-105" ref={cardRef} onClick={handleClick}>
       <motion.div
         className="relative flex justify-center items-center h-full rounded-2xl shadow-md border-[6px] border-zinc-300 cursor-pointer"
         animate={{ rotateY: isFlipped ? 180 : 0 }}
@@ -58,10 +59,11 @@ const Card: React.FC<CardProps> = ({ imgSrc, delay, onClick }) => {
           transition={{ duration: 2, delay: delay }}
           style={{ perspective: 1000 }}
         >
-          <img
+          <Image
             src={imgSrc}
             alt="DTU logo"
-            className="h-full w-full object-contain"
+            layout='fill'
+            objectFit='contain'
           />
         </motion.div>
       </motion.div>
@@ -91,20 +93,20 @@ export default function FlippingCard() {
 
   return (
     <div className='w-full h-full grid grid-cols-3 gap-8 relative'>
-      <Card 
-        imgSrc="experienceLogos/htxlogo.png" 
-        delay={isFlipped ? delay_time : delay_time * 3} 
-        onClick={(position) => handleCardClick(education_data[0], position)} 
+      <Card
+        imgSrc="/experienceLogos/htxlogo.png"
+        delay={isFlipped ? delay_time : delay_time * 3}
+        onClick={(position) => handleCardClick(education_data[0], position)}
       />
-      <Card 
-        imgSrc="experienceLogos/dtu.png" 
-        delay={isFlipped ? delay_time * 2 : delay_time * 2} 
-        onClick={(position) => handleCardClick(education_data[1], position)} 
+      <Card
+        imgSrc="/experienceLogos/dtu.png"
+        delay={isFlipped ? delay_time * 2 : delay_time * 2}
+        onClick={(position) => handleCardClick(education_data[1], position)}
       />
-      <Card 
-        imgSrc="experienceLogos/dtu.png" 
-        delay={isFlipped ? delay_time * 3 : delay_time} 
-        onClick={(position) => handleCardClick(education_data[2], position)} 
+      <Card
+        imgSrc="/experienceLogos/dtu.png"
+        delay={isFlipped ? delay_time * 3 : delay_time}
+        onClick={(position) => handleCardClick(education_data[2], position)}
       />
 
       <AnimatePresence>
@@ -129,7 +131,9 @@ export default function FlippingCard() {
             </div>
             <div className="w-[350px] h-full py-8 pe-8 flex justify-center items-center">
               <div className='w-full h-full bg-white rounded-xl flex justify-center items-center p-4'>
-              <img src={chosenEducation.img} alt="education" className="w-full h-full object-contain" />
+                <div className='relative w-full h-full'>
+                  <Image src={`/experienceLogos/${chosenEducation.img}`} alt="education" fill style={{ objectFit: "contain" }} />
+                </div>
               </div>
             </div>
 
@@ -147,7 +151,7 @@ export default function FlippingCard() {
 const education_data = [
   {
     key: 0,
-    img: "experienceLogos/htxlogo.png",
+    img: "htxlogo.png",
     title: "HTX -> Roskilde",
     subtitle: "Gymnasium - Math/Physics",
     year: "2016-2019",
@@ -156,7 +160,7 @@ const education_data = [
   },
   {
     key: 1,
-    img: "experienceLogos/dtu.png",
+    img: "dtu.png",
     title: "Technical University of Denmark",
     subtitle: "B.Sc. Mechanical Engineering",
     year: "2019-2022",
@@ -165,7 +169,7 @@ const education_data = [
   },
   {
     key: 2,
-    img: "experienceLogos/dtu.png",
+    img: "dtu.png",
     title: "Technical University of Denmark",
     subtitle: "M.Sc. Mechanical Engineering",
     year: "2022-2025",

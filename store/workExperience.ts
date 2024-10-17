@@ -46,7 +46,6 @@ fetch(dataUrl)
   .then(res => res.json())
   .then((data: WorkExperience[]) => {
     useWorkExperience.getState().setExperience(data);
-    console.log(useWorkExperience.getState().experience);
   });
 
 

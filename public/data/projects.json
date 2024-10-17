@@ -3,7 +3,7 @@
       "key": 1,
       "title": "Automatic dart scoring system",
       "monthYear": "January 2021",
-      "imagePath": "./projectPictures/dart/",
+      "imagePath": "/projectPictures/dart/",
       "image": [
         { "path": "onWall.jpg", "args": "col-span-4 row-span-2" },
         { "path": "dart_4.png", "args": "col-span-2 row-span-2" },
@@ -31,7 +31,7 @@
       "key": 2,
       "title": "Motorized skateboard",
       "monthYear": "March 2021",
-      "imagePath": "./projectPictures/skateboard/",
+      "imagePath": "/projectPictures/skateboard/",
       "image": [
         { "path": "front.png", "args": "col-span-4 row-span-2" },
         { "path": "back.png", "args": "col-span-2 row-span-2" },
@@ -54,7 +54,7 @@
       "key": 3,
       "title": "AI generated card game",
       "monthYear": "June 2021",
-      "imagePath": "./projectPictures/cardGame/",
+      "imagePath": "/projectPictures/cardGame/",
       "image": [
         { "path": "real.jpg", "args": "col-span-4 row-span-2" },
         { "path": "Thorne.png", "args": "col-span-2 row-span-2" },
@@ -78,7 +78,7 @@
       "key": 4,
       "title": "3D-printed Settlers of Catan",
       "monthYear": "September 2021",
-      "imagePath": "./projectPictures/catan/",
+      "imagePath": "/projectPictures/catan/",
       "image": [
         { "path": "onTable.jpg", "args": "col-span-1 row-span-1" }
       ],
@@ -95,7 +95,7 @@
       "key": 5,
       "title": "Chess board",
       "monthYear": "December 2021",
-      "imagePath": "./projectPictures/chessboard/",
+      "imagePath": "/projectPictures/chessboard/",
       "image": [
         { "path": "onTable.jpg", "args": "col-span-1 row-span-1" }
       ],
@@ -114,7 +114,7 @@
       "key": 6,
       "title": "Home Server",
       "monthYear": "December 2021",
-      "imagePath": "./projectPictures/dart/",
+      "imagePath": "/projectPictures/dart/",
       "image": [
         { "path": "onWall.jpg", "args": "col-span-1 row-span-1" }
       ],

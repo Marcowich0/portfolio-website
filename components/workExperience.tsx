@@ -6,6 +6,7 @@ import { DateTime } from 'luxon';
 import { useWorkExperience } from '@/store/workExperience';
 import { motion, AnimatePresence, useInView } from 'framer-motion';
 import { useEffect, useState, useRef } from 'react';
+import Image from 'next/image';
 
 import { v4 as uuidv4 } from 'uuid';
 
@@ -26,8 +27,7 @@ export default function WorkExperience() {
     const experienceRefs = useRef<(HTMLDivElement | null)[]>([]);
 
     const experienceData = useWorkExperience((state) => state.experience);
-    console.log(experienceData);
-
+  
     function calculateMonthDifference(startDate: string, endDate: string): number {
         const start = DateTime.fromISO(startDate);
         const end = DateTime.fromISO(endDate);
@@ -67,101 +67,107 @@ export default function WorkExperience() {
         return diff / timeSinceEarliest * 100;
     }
 
-    console.log(verticalYearLines);
     return (
-        <div className='w-full h-full flex flex-row overflow-visible'>
-            <div className="relative w-full h-auto overflow-visible">
-                {verticalYearLines.map((line) => (
-                    <div key={uuidv4()} className="absolute bottom-0 top-0 w-[5px] flex justify-center" style={{ left: `${line.position}%` }}>
-                        <h1 className="text-4xl text-black">{line.year}</h1>
-                        <div className="absolute bottom-0 top-14 w-full bg-black flex justify-center"></div>
-                    </div>
-                ))}
-                {verticalMonthLines.map((line) => (
-                    <div key={uuidv4()} className="absolute bottom-0 top-14 w-[1px] bg-black opacity-40" style={{ left: `${line}%` }}></div>
-                ))}
-
-<AnimatePresence mode="popLayout">
-  {hoveredIndex !== null && hoveredIndex !== undefined && (
-    <div className='w-full h-full relative' key={hoveredIndex}>
-      <motion.div
-        className='w-[650px] h-[300px] z-[9999] fixed flex justify-between p-4 rounded-2xl border-2 border-zinc-500 bg-zinc-100'
-        style={{
-          left: `${hoveredPosition ? hoveredPosition.left + hoveredPosition.width / 2 : 0}px`,
-          top: `${hoveredPosition ? hoveredPosition.top - 332 : 0}px`
-        }}
-        initial={{ opacity: 0, scale: 0, x: '-50%', y: "160px" }}
-        animate={{ opacity: 1, scale: 1, y: 0 }}
-        exit={{ opacity: 0, scale: 0, x: '-50%', y: "160px" }}
-        transition={{ duration: 0.3 }}
-      >
-        <div className='w-2/3 pe-8'>
-          <h1 className="text-black font-bold text-xl">{experienceData[hoveredIndex - 1].name}</h1>
-          <h2 className="text-m bg-clip-text text-transparent bg-gradient-to-r from-teal-400 to-cyan-400 font-bold">{experienceData[hoveredIndex - 1].position}</h2>
-          <ul className="list-disc pl-6 mt-4">
-            {experienceData[hoveredIndex - 1].description.map((desc, index) => (
-              <li key={uuidv4()} className='text-sm text-black'>{desc}</li>
-            ))}
-          </ul>
-        </div>
-
-        <div className='flex flex-col items-end w-1/3'>
-          <h1 className="text-teal-800 font-bold text-[15px] opacity-80">{experienceData[hoveredIndex - 1].time[0]}  {"->"}  {experienceData[hoveredIndex - 1].time[1]}</h1>
-          <h1 className="text-teal-800 text-m opacity-80">{experienceData[hoveredIndex - 1].location}</h1>
-          <div className='flex justify-end h-[75%] w-full my-4 bg-white p-8 rounded-lg border-2 border-zinc-200'>
-            <img src={`/experienceLogos/${experienceData[hoveredIndex - 1].image}`} className="w-full h-full object-contain" />
-          </div>
-        </div>
-      </motion.div>
-    </div>
-  )}
-</AnimatePresence>
-
-                <motion.div className="absolute top-14 w-full h-auto flex flex-col space-y-6 mt-3 overflow-visible"
-                    initial={{ clipPath: 'inset(0 100% 0 0)' }}
-                    animate={isInView ? { clipPath: 'inset(0 0 0 0)' } : {}}
-                    transition={{ duration: totalDuration, ease: "linear" }}
-                    ref={ref}
-                >
-                    {experienceData.map((exp, index) => (
-
-                        <div className='relative' style={{ left: `${dateToPosition(exp.time[0])}%`, width: `${dateToPosition(exp.time[1]) - dateToPosition(exp.time[0])}%` }}
-                            key={uuidv4()}>
-                            <div
-                                key={uuidv4()}
-                                ref={(el) => { (experienceRefs.current[index] = el) }}
-                                onMouseEnter={() => {
-                                    if (hoveredIndex !== exp.id) {
-                                        setHoveredIndex(exp.id);
-                                    }
-                                    if (experienceRefs.current[index] && hoveredIndex !== exp.id) {
-                                        const position = experienceRefs.current[index].getBoundingClientRect();
-                                        const offsetParentRect = experienceRefs.current[index]?.offsetParent?.getBoundingClientRect();
-                                        console.log(offsetParentRect);
-                                        setHoveredPosition(position);
-                                        console.log(hoveredPosition);
-                                    }
-                                }}
-                                onMouseLeave={() => {
-                                    setHoveredIndex(null);
-                                }}
-
-                                className="relative h-12 rounded-full flex flex-row items-center ps-1 bg-gradient-to-r from-teal-400 to-cyan-400 border-2 border-zinc-400 overflow-hidden"
-                            >
-
-                                <div className='bg-white w-16 rounded-full overflow-hidden flex-shrink-0 flex justify-center items-center'>
-                                    <img src={`/experienceLogos/${exp.image}`} className="h-10 " />
-                                </div>
-
-                                <div className="overflow-hidden text-ellipsis whitespace-nowrap w-full">
-                                    <h1 className="text-zinc-100 font-bold ps-2">{exp.name}</h1>
-                                </div>
-                            </div>
+        <div
+            className="w-full h-[500px] p-16 border-[6px] rounded-2xl border-zinc-300 overflow-visible"
+            onMouseLeave={() => {
+                setHoveredIndex(null);
+            }}>
+            <div className='w-full h-full flex flex-row overflow-visible'>
+                <div className="relative w-full h-auto overflow-visible">
+                    {verticalYearLines.map((line) => (
+                        <div key={uuidv4()} className="absolute bottom-0 top-0 w-[5px] flex justify-center" style={{ left: `${line.position}%` }}>
+                            <h1 className="text-4xl text-black">{line.year}</h1>
+                            <div className="absolute bottom-0 top-14 w-full bg-black flex justify-center"></div>
                         </div>
                     ))}
-                </motion.div>
+                    {verticalMonthLines.map((line) => (
+                        <div key={uuidv4()} className="absolute bottom-0 top-14 w-[1px] bg-black opacity-40" style={{ left: `${line}%` }}></div>
+                    ))}
+
+                    <AnimatePresence mode="popLayout">
+                        {hoveredIndex !== null && hoveredIndex !== undefined && (
+                            <div className='w-full h-full relative' key={hoveredIndex}>
+                                <motion.div
+                                    className='w-[650px] h-[300px] z-[9999] fixed flex justify-between p-4 rounded-2xl border-2 border-zinc-500 bg-zinc-50'
+                                    style={{
+                                        left: `${hoveredPosition ? hoveredPosition.left + hoveredPosition.width / 2 : 0}px`,
+                                        top: `${hoveredPosition ? hoveredPosition.top - 332 : 0}px`
+                                    }}
+                                    initial={{ opacity: 0, scale: 0, x: '-50%', y: "160px" }}
+                                    animate={{ opacity: 1, scale: 1, y: 0 }}
+                                    exit={{ opacity: 0, scale: 0, x: '-50%', y: "160px" }}
+                                    transition={{ duration: 0.3 }}
+                                >
+                                    <div className='w-2/3 pe-8'>
+                                        <h1 className="text-black font-bold text-xl">{experienceData[hoveredIndex - 1].name}</h1>
+                                        <h2 className="text-m bg-clip-text text-transparent bg-gradient-to-r from-teal-400 to-cyan-400 font-bold">{experienceData[hoveredIndex - 1].position}</h2>
+                                        <ul className="list-disc pl-6 mt-4">
+                                            {experienceData[hoveredIndex - 1].description.map((desc, index) => (
+                                                <li key={uuidv4()} className='text-sm text-black'>{desc}</li>
+                                            ))}
+                                        </ul>
+                                    </div>
+
+                                    <div className='flex flex-col items-end w-1/3'>
+                                        <h1 className="text-teal-800 font-bold text-[15px] opacity-80">{experienceData[hoveredIndex - 1].time[0]}  {"->"}  {experienceData[hoveredIndex - 1].time[1]}</h1>
+                                        <h1 className="text-teal-800 text-m opacity-80">{experienceData[hoveredIndex - 1].location}</h1>
+                                        <div className='flex justify-end h-[75%] w-full my-4 bg-white p-4 rounded-lg border-2 border-zinc-200'>
+                                            <div className='relative w-full h-full'>
+                                                <Image src={`/experienceLogos/${experienceData[hoveredIndex - 1].image}`} alt="big logo" fill style={{ objectFit:"contain" }} />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </motion.div>
+                            </div>
+                        )}
+                    </AnimatePresence>
+
+                    <motion.div className="absolute top-14 w-full h-auto flex flex-col space-y-6 mt-3 overflow-visible"
+                        initial={{ clipPath: 'inset(0 100% 0 0)' }}
+                        animate={isInView ? { clipPath: 'inset(0 0 0 0)' } : {}}
+                        transition={{ duration: totalDuration, ease: "linear" }}
+                        ref={ref}
+                    >
+                        {experienceData.map((exp, index) => (
+
+                            <div className='relative' style={{ left: `${dateToPosition(exp.time[0])}%`, width: `${dateToPosition(exp.time[1]) - dateToPosition(exp.time[0])}%` }}
+                                key={uuidv4()}>
+                                <div
+                                    key={uuidv4()}
+                                    ref={(el) => { (experienceRefs.current[index] = el) }}
+                                    onMouseEnter={() => {
+                                        if (hoveredIndex !== exp.id) {
+                                            setHoveredIndex(exp.id);
+                                        }
+                                        if (experienceRefs.current[index] && hoveredIndex !== exp.id) {
+                                            const position = experienceRefs.current[index].getBoundingClientRect();
+                                              setHoveredPosition(position);
+                                          }
+                                    }}
+                                    onMouseLeave={() => {
+                                        setHoveredIndex(null);
+                                    }}
+
+                                    className="relative h-12 rounded-full flex flex-row items-center ps-1 bg-gradient-to-r from-teal-400 to-cyan-400 border-2 border-zinc-400 overflow-hidden"
+                                >
+
+                                    <div className='bg-white w-16 h-10 rounded-full overflow-hidden flex-shrink-0 flex justify-center items-center'>
+                                        <div className='relative w-full h-full'>
+                                            <Image src={`/experienceLogos/${exp.image}`} alt="big logo" fill style={{ objectFit: "contain" }} />
+                                        </div>
+                                    </div>
+
+                                    <div className="overflow-hidden text-ellipsis whitespace-nowrap w-full">
+                                        <h1 className="text-zinc-100 font-bold ps-2">{exp.name}</h1>
+                                    </div>
+                                </div>
+                            </div>
+                        ))}
+                    </motion.div>
 
 
+                </div>
             </div>
         </div>
     );

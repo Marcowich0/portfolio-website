@@ -2,6 +2,7 @@
 import React, { useState, useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
 import { v4 as uuidv4 } from 'uuid';
+import Image from 'next/image';
 
 interface Skill {
     id: number;
@@ -69,14 +70,16 @@ export default function SkillCategory() {
     }
 
     return (
-        <div className='h-full columns-2xs 2k:columns-sm'  ref={ref}>
+        <div className='h-full columns-2xs 2k:columns-sm' ref={ref}>
             {skillArray.map((skills, index) => (
                 <div className="border-[6px] border-zinc-300 rounded-2xl mb-4" key={uuidv4()} style={{ breakInside: "avoid" }}>
                     <h1 className="text-3xl font-bold text-black text-center my-6">{skillNames[index]}</h1>
                     {skills.map((skill) => (
                         <div key={skill.id} className="h-16 m-4 rounded-lg flex flex-row">
-                            <div className='flex justify-center items-center bg-white h-full w-20 rounded-lg overflow-hidden border-2 border-zinc-200'>
-                                <img src={skill.image} className="h-full w-20 object-contain" />
+                            <div className='flex justify-center items-center w-20 h-16 rounded-lg overflow-hidden border-2 border-zinc-200 bg-white'>
+                                <div className='relative w-full h-full'>
+                                    <Image src={`/SkillLogos/${skill.image}`} alt={skill.name} fill style={{ objectFit: 'cover' }} />
+                                </div>
                             </div>
                             <div className='w-full h-full flex flex-col justify-between ps-2'>
                                 <div className='w-full flex flex-row justify-between'>
@@ -84,7 +87,7 @@ export default function SkillCategory() {
                                     <h1 className="text-black font-bold">{skillLevelName(skill.level)}</h1>
                                 </div>
                                 {skillBar(skill.level, isInView)}
-                                
+
                             </div>
                         </div>
                     ))}
@@ -101,61 +104,61 @@ const programming = [
         id: 1,
         name: "Python",
         level: 9,
-        image: "../SkillLogos/python.png",
+        image: "python.png",
     },
     {
         id: 2,
         name: "Java",
         level: 6,
-        image: "../SkillLogos/java.png",
+        image: "java.png",
     },
     {
         id: 3,
         name: "C++",
         level: 3,
-        image: "../SkillLogos/cpp.png",
+        image: "cpp.png",
     },
     {
         id: 4,
         name: "JavaScript",
         level: 5,
-        image: "../SkillLogos/javascript.png",
+        image: "javascript.png",
     },
     {
         id: 5,
         name: "TypeScript",
         level: 5,
-        image: "../SkillLogos/typescipt.webp",
+        image: "typescipt.webp",
     },
     {
         id: 6,
         name: "Matlab",
         level: 5,
-        image: "../SkillLogos/matlab.png",
+        image: "matlab.png",
     },
     {
         id: 7,
         name: "Maple",
         level: 7,
-        image: "../SkillLogos/maple.png",
+        image: "maple.png",
     },
     {
         id: 8,
         name: "SQL",
         level: 6,
-        image: "../SkillLogos/sql.jpg",
+        image: "sql.jpg",
     },
     {
         id: 9,
         name: "postgresql",
         level: 7,
-        image: "../SkillLogos/postgres.png",
+        image: "postgres.png",
     },
     {
         id: 10,
         name: "Git",
         level: 4,
-        image: "../SkillLogos/git.webp",
+        image: "git.webp",
     },
 ];
 
