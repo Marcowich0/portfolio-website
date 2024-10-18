@@ -91,6 +91,23 @@ export default function Home() {
 
   return (
     <main className="flex flex-col items-center overflow-hidden scroll-smooth bg-white" style={{ background: '#FBFBFB' }}>
+      <style jsx global>{`
+        html, body {
+          overflow-x: hidden;
+          overflow-y: scroll;
+        }
+
+        html::-webkit-scrollbar {
+          width: 0px;
+          background: transparent; /* Optional: just make scrollbar invisible */
+        }
+
+        /* Hide scrollbar for IE, Edge and Firefox */
+        html {
+          -ms-overflow-style: none;  /* IE and Edge */
+          scrollbar-width: none;  /* Firefox */
+        }
+      `}</style>
       {/* --------------------- Landing page -------------------- */}
       <div id="home"></div>
       <FrontPage />
