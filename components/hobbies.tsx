@@ -110,7 +110,7 @@ export default function HobbyFrames() {
                                     initial={{ opacity: "0%" }}
                                     animate={{ opacity: "35%" }}
                                     exit={{ opacity: "0%" }}
-                                    transition={{ duration: 0.5 }}>
+                                    transition={{ duration: 0.3 }}>
                                 </motion.div>
                             )}
                         </AnimatePresence>
@@ -142,7 +142,7 @@ export default function HobbyFrames() {
                                 height: `${selectedHobbyPosition.height}%`,
                                 transform: "translate(0, 0)",
                             }}
-                            transition={{ duration: 0.5 }}
+                            transition={{ duration: 0.3 }}
                         >
                             <Image src={`/hobbies/${selectedHobby.thumbnail}`} alt="hobby" fill style={{ objectFit: "cover"}} />
                             <motion.div
@@ -150,7 +150,7 @@ export default function HobbyFrames() {
                                 initial={{ opacity:0, transform: "translateY(100%)" }}
                                 animate={{ opacity:1, transform: "translateY(0)" }}
                                 exit={{ opacity:0, transform: "translateY(100%)" }}
-                                transition={{ duration: 0.5 }}
+                                transition={{ duration: 0.3 }}
                             >
                                 <h2 className="text-2xl font-bold">{selectedHobby.headline}</h2>
                                 <p className="mt-2">{selectedHobby.content}</p>

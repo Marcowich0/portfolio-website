@@ -1,15 +1,15 @@
 'use client';
 
-import React, { use, useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef } from "react";
 /* ------------ Import aceternity components ------------- */
 
 import FrontPage from "@/components/frontPage";
-import AnimatedHeadline from "@/components/AnimatedHeadline";
-import SkillCategory from "@/components/SkillCategory";
+import Headline from "@/components/headline";
+import SkillCategory from "@/components/skill";
 import WorkExperience from "@/components/workExperience";
 import Navbar from "@/components/navbar";
-import HobbyFrames from "@/components/hobbyFrames";
-import AnimatedProjects from "@/components/animatedProjects";
+import HobbyFrames from "@/components/hobbies";
+import AnimatedProjects from "@/components/projects";
 import FlippingCard from "@/components/education";
 
 import BackPage from "@/components/backPage";
@@ -138,7 +138,7 @@ export default function Home() {
         <motion.div
           className="snap-start flex flex-col items-center w-full h-full overflow-visible mt-24"
         >
-          <AnimatedHeadline title="Work Experience" />
+          <Headline title="Work Experience" />
 
           <motion.div className="mb-12 flex justify-center">
             <h4 className={smallHeadLineClassName}> I have been working since my early teens, here is a quick overview of the companies i have contribuated to</h4>
@@ -156,7 +156,7 @@ export default function Home() {
         <motion.div
           className="snap-start flex flex-col items-center w-full h-full overflow-visible mt-24"
         >
-          <AnimatedHeadline title="Education" />
+          <Headline title="Education" />
 
           <motion.div className="mb-12 flex justify-center">
             <h4 className={smallHeadLineClassName}> I have a masters degree in mechanical engineering, here is an overview of my education earning that title</h4>
@@ -177,7 +177,7 @@ export default function Home() {
         <div
           className="snap-start flex flex-col items-center w-full h-full mt-24"
         >
-          <AnimatedHeadline title="Projects" />
+          <Headline title="Projects" />
           <motion.div className=" flex justify-center">
             <h4 className={smallHeadLineClassName}> I do personal projects all the time, here is a few notable ones, as long with some from my studies</h4>
           </motion.div>
@@ -195,10 +195,10 @@ export default function Home() {
         <div
           className="snap-start flex flex-col items-center w-full h-full mt-24"
         >
-          <AnimatedHeadline title="Skills" />
+          <Headline title="Skills" />
 
           <motion.div className="flex justify-center">
-            <h4 className={smallHeadLineClassName}> Through Work, School and spare time projects, i have gained experience in a veriety of applications and programming languages. Here is a quick categorized overview of my skilllevel</h4>
+            <h4 className={smallHeadLineClassName}> Through Work, School and spare time projects, i have gained experience in a veriety of applications and programming languages. Here is a quick categorized overview of my skill level</h4>
           </motion.div>
 
           <div className="w-full h-full mt-12">
@@ -217,7 +217,7 @@ export default function Home() {
         <div
           className="snap-start flex flex-col items-center w-full h-full mt-24"
         >
-          <AnimatedHeadline title="Hobbies" />
+          <Headline title="Hobbies" />
 
           <motion.div className=" flex justify-center">
             <h4 className={smallHeadLineClassName}> Here is a quick overview of what I like to do in my spare time</h4>

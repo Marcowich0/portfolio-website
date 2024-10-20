@@ -118,59 +118,66 @@ export default function FlippingCard() {
       <AnimatePresence>
         {chosenEducation && popupPosition && (
           <motion.div
-            className="bg-zinc-50 rounded-2xl border-zinc-500 border-4 absolute z-50 flex flex-col"
-            initial={{ x: popupPosition.x, y: popupPosition.y, width: popupPosition.width, height: popupPosition.height, opacity: 0 }}
-            animate={{ width: '900px', height: '500px', left: '50%', top: '50%', transform: 'translate(-50%, -50%)', opacity: 1 }}
-            exit={{ x: popupPosition.x, y: popupPosition.y, width: popupPosition.width, height: popupPosition.height, opacity: 0 }}
+            className="bg-zinc-50 rounded-2xl border-zinc-500 border-4 overflow-hidden absolute"
+            initial={{ left: popupPosition.x, top: popupPosition.y, width: popupPosition.width, height: popupPosition.height }}
+            animate={{ width: '900px', height: '500px', left: '50%', top: '50%', transform: 'translate(-50%, -50%)' }}
+            exit={{ left: popupPosition.x, top: popupPosition.y, width: popupPosition.width, height: popupPosition.height, transform: 'translate(0%, 0%)' }}
             transition={{ duration: 0.3 }}
           >
+            <motion.div
+              className="w-full h-full absolute z-50 flex flex-col"
+              initial={{ opacity: 0, scale: 0.7, }}
+              animate={{ opacity: 1, scale: 1, }}
+              exit={{ opacity: 0, scale: 0.7, }}
+              transition={{ duration: 0.3 }}
+            >
 
-            <div className="p-8 flex flex-row w-full">
-              <div className='flex flex-col items-start w-2/3'>
-                <h1 className='text-black font-bold text-3xl'>{chosenEducation.title}</h1>
-                <h2 className='text-red-600 font-bold text-xl opacity-80 mt-2'>{chosenEducation.subtitle}</h2>
+              <div className="p-8 flex flex-row w-full">
+                <div className='flex flex-col items-start w-2/3'>
+                  <h1 className='text-black font-bold text-3xl'>{chosenEducation.title}</h1>
+                  <h2 className='text-red-600 font-bold text-xl opacity-80 mt-2'>{chosenEducation.subtitle}</h2>
+                </div>
+                <div className='flex flex-col w-1/3 items-end'>
+                  <h1 className='text-black font-bold text-3xl opacity-80'>{chosenEducation.year}</h1>
+                  <h2 className='text-black font-bold text-xl opacity-60 mt-2'>{chosenEducation.location}</h2>
+                </div>
               </div>
-              <div className='flex flex-col w-1/3 items-end'>
-                <h1 className='text-black font-bold text-3xl opacity-80'>{chosenEducation.year}</h1>
-                <h2 className='text-black font-bold text-xl opacity-60 mt-2'>{chosenEducation.location}</h2>
-              </div>
-            </div>
 
-            <div className='w-full h-full flex flex-row px-8 pb-8'>
+              <div className='w-full h-full flex flex-row px-8 pb-8'>
 
-              <div className='w-full h-full relative'>
-                <p className='text-zinc-800 font-bold text-lg'>{chosenEducation.description}</p>
+                <div className='w-full h-full relative'>
+                  <p className='text-zinc-800 font-bold text-lg'>{chosenEducation.description}</p>
 
-                <div className='absolute bottom-0 left-0 flex flex-row space-x-4'>
-                  <button className='w-36 h-12 bg-red-600 flex justify-center items-center rounded-lg shadow-md hover:bg-red-700 active:bg-red-800 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-opacity-50 transition duration-150 ease-in-out'>
-                    <p className='text-white font-bold text-lg'>Diploma</p>
-                  </button>
+                  <div className='absolute bottom-0 left-0 flex flex-row space-x-4'>
+                    <button className='w-36 h-12 bg-red-600 flex justify-center items-center rounded-lg shadow-md hover:bg-red-700 active:bg-red-800 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-opacity-50 transition duration-150 ease-in-out'>
+                      <p className='text-white font-bold text-lg'>Diploma</p>
+                    </button>
                     {/* <button className='w-36 h-12 bg-red-600 flex justify-center items-center rounded-lg shadow-md hover:bg-red-700 active:bg-red-800 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-opacity-50 transition duration-150 ease-in-out'>
                     <p className='text-white font-bold text-lg'>Grades</p>
                     </button> */}
+                  </div>
+
+                  <p className='text-zinc-800 font-bold text-lg absolute bottom-0 right-0'>GPA: {chosenEducation.GPA}</p>
                 </div>
 
-                <p className='text-zinc-800 font-bold text-lg absolute bottom-0 right-0'>GPA: {chosenEducation.GPA}</p>
-              </div>
-
-              <div className='w-[350px] h-full rounded-xl flex justify-center items-center p-6 ms-8 bg-white border-4 border-zinc-300'>
-                <div className='relative w-full h-full'>
-                  <Image src={`/experienceLogos/${chosenEducation.img}`} alt="education" fill style={{ objectFit: "contain" }} />
+                <div className='w-[350px] h-full rounded-xl flex justify-center items-center p-6 ms-8 bg-white border-4 border-zinc-300'>
+                  <div className='relative w-full h-full'>
+                    <Image src={`/experienceLogos/${chosenEducation.img}`} alt="education" fill style={{ objectFit: "contain" }} />
+                  </div>
                 </div>
+
               </div>
 
-            </div>            
-
-            
+            </motion.div>
           </motion.div>
         )}
       </AnimatePresence>
       <AnimatePresence>
         {chosenEducation && popupPosition && (
           <div className='w-screen h-screen z-40 opacity-0 bg-purple-200 absolute cursor-default'
-              style={{ top: "50%", left: "50%", transform: "translate(-50%,-50%)" }}
-              onClick={() => setChosenEducation(null)}>
-            </div>
+            style={{ top: "50%", left: "50%", transform: "translate(-50%,-50%)" }}
+            onClick={() => setChosenEducation(null)}>
+          </div>
         )}
       </AnimatePresence>
     </div>
