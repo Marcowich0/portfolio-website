@@ -12,6 +12,7 @@ import HobbyFrames from "@/components/hobbies";
 import AnimatedProjects from "@/components/projects";
 import FlippingCard from "@/components/education";
 import GlobeDemo from "@/components/globe";
+import STLViewer from "@/components/helpingComponents/displayStlModel";
 
 import { motion } from 'framer-motion';
 
@@ -226,6 +227,8 @@ export default function Home() {
 
         </div>
 
+        
+
         {/* --------------------- Globe -------------------- */}
         <div id="contact"></div>
         <div
@@ -242,7 +245,7 @@ export default function Home() {
           <div className=" mb-[200px]"/>
         </div>
 
-
+        
 
 
       </div>

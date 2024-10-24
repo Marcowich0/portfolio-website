@@ -78,7 +78,12 @@ export default function SkillCategory() {
                         <div key={skill.id} className="h-12 m-4 rounded-lg flex flex-row">
                             <div className='flex justify-center items-center w-14 h-full rounded-lg overflow-hidden border-2 border-zinc-200 bg-white'>
                                 <div className='relative w-full h-full'>
-                                    <Image src={`/skillLogos/${skill.image}`} alt={skill.name} fill sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" unoptimized style={{ objectFit: 'contain' }} />
+                                    <Image 
+                                    src={`/skillLogos/${skill.image}`} 
+                                    alt={skill.name} 
+                                    fill 
+                                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"  
+                                    style={{ objectFit: 'contain' }} />
                                 </div>
                             </div>
                             <div className='w-full h-full flex flex-col justify-between ps-2'>

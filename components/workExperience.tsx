@@ -117,7 +117,13 @@ export default function WorkExperience({ animate }: WorkExperienceProps) {
                                         <h1 className="text-teal-800 text-m opacity-80">{experienceData[hoveredIndex - 1].location}</h1>
                                         <div className='flex justify-end h-[75%] w-full my-4 bg-white p-4 rounded-lg border-2 border-zinc-200'>
                                             <div className='relative w-full h-full'>
-                                                <Image src={`/experienceLogos/${experienceData[hoveredIndex - 1].image}`} alt="big logo" fill style={{ objectFit: "contain" }} />
+                                                <Image 
+                                                src={`/experienceLogos/${experienceData[hoveredIndex - 1].image}`} 
+                                                alt="big logo" 
+                                                fill 
+                                                priority
+                                                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" 
+                                                style={{ objectFit: "contain" }} />
                                             </div>
                                         </div>
                                     </div>
@@ -175,7 +181,7 @@ export default function WorkExperience({ animate }: WorkExperienceProps) {
 
                                     <div className='bg-white w-16 h-10 rounded-full overflow-hidden flex-shrink-0 flex justify-center items-center'>
                                         <div className='relative w-full h-full'>
-                                            <Image src={`/experienceLogos/${exp.image}`} alt="big logo" fill style={{ objectFit: "contain" }} />
+                                            <Image src={`/experienceLogos/${exp.image}`} alt="big logo" fill sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"  style={{ objectFit: "contain" }} />
                                         </div>
                                     </div>
 

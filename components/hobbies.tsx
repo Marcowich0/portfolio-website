@@ -96,7 +96,12 @@ export default function HobbyFrames() {
                             })
                         }}
                     >
-                        <Image src={`/hobbies/${hobby.thumbnail}`} alt="hobby" fill style={{ objectFit: "cover" }} />
+                        <Image 
+                        src={`/hobbies/${hobby.thumbnail}`} 
+                        alt="hobby" 
+                        fill 
+                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" 
+                        style={{ objectFit: "cover" }} />
                         <div className="absolute top-0 left-0 w-full h-full flex justify-center items-center">
                             <div className="absolute top-0 left-0 w-full h-full bg-black opacity-0 group-hover:opacity-40 transition-opacity duration-300"></div>
                             <h1 className="relative text-2xl font-bold text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10">
@@ -144,7 +149,7 @@ export default function HobbyFrames() {
                             }}
                             transition={{ duration: 0.3 }}
                         >
-                            <Image src={`/hobbies/${selectedHobby.thumbnail}`} alt="hobby" fill style={{ objectFit: "cover"}} />
+                            <Image src={`/hobbies/${selectedHobby.thumbnail}`} alt="hobby" fill sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"  style={{ objectFit: "cover"}} />
                             <motion.div
                                 className="absolute bottom-0 left-0 p-4 bg-black bg-opacity-70 text-white w-full"
                                 initial={{ opacity:0, transform: "translateY(100%)" }}

@@ -10,6 +10,7 @@ import { v4 as uuidv4 } from 'uuid';
 
 import Image from 'next/image';
 
+// <STLViewer url="/projectPictures/dart/dart.STL" width={400} height={400} />
 interface project {
   key: number,
   title: string,
@@ -104,10 +105,11 @@ const RenderProjects = (projects: project[], direction: 'left' | 'right' = 'left
           projects.map((project) => (
             <motion.div 
                 key={project.key}
-                className="h-full w-full"
+                className="h-full w-full cursor-pointer"
                 initial="normal"
                 whileHover="hover"
                 animate="normal"
+                onClick={() => setChosenProject(project)}
               >
                 <motion.div
                   key={uuidv4()}
@@ -131,14 +133,14 @@ const RenderProjects = (projects: project[], direction: 'left' | 'right' = 'left
                         alt={`Skill ${project.key}`}
                         fill 
                         style={{ objectFit: 'cover' }}
+                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" 
                         className="rounded-2xl h-full w-full"
                       />
                     </div>
                     <motion.div 
-                      className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 rounded-lg cursor-pointer"
+                      className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 rounded-lg"
                       variants={overlayVariants}
-                      onClick={() => setChosenProject(project)}
-                    >
+                      >
                       <motion.span 
                         className="text-white text-lg font-bold"
                         variants={overlayVariants}
