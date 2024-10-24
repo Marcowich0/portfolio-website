@@ -19,7 +19,7 @@ export default function Home() {
 
   const smallHeadLineClassName = "text-black opacity-80 text-lg font-bold -mt-6 w-[80%] text-center";
 
-  const lag = 800;
+  const lag = 400;
   const lastPageHeight = 250;
 
   const elementRef = useRef<HTMLDivElement>(null);

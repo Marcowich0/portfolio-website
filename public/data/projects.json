@@ -12,6 +12,7 @@
         { "path": "dart_2.jpg", "args": "col-span-2 row-span-1" },
         { "path": "screen_picture.jpg", "args": "col-span-2 row-span-1" }
       ],
+      "modelUrl": "dart.stl",
       "description": [
         "Build initial setup using 2 cheap webcams and 3D-printed mounts.",
         "Wrote initial code using blob detection and line recognition in OpenCV.",

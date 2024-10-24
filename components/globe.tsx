@@ -436,7 +436,7 @@ export default function GlobeDemo() {
             {iconItems.map((item, index) => (
                 <a href={item.href} target="_blank" rel="noopener noreferrer" key={item.text}>
                     <motion.button
-                        className={`w-[280px] h-14 2k:w-[350px] 2k:h-20 rounded-xl shadow-md absolute flex flex-row items-center px-4 space-x-4 focus:outline-none transition duration-150 ease-in-out ${index >= 0 && index <= 3
+                        className={`w-[280px] h-14 2k:w-[350px] 2k:h-20 rounded-xl shadow-md absolute flex flex-row items-center px-4 space-x-4 z-[80] focus:outline-none transition duration-150 ease-in-out ${index >= 0 && index <= 3
                                 ? 'bg-gradient-to-r from-teal-600 to-cyan-800 hover:from-teal-800 hover:to-cyan-800 active:from-teal-500 active:to-cyan-800'
                                 : 'bg-gradient-to-r from-cyan-800 to-teal-600 hover:from-cyan-800 hover:to-teal-800 active:from-cyan-800 active:to-teal-500'
                             }`}

@@ -7,6 +7,7 @@ import { useProjects } from "@/store/projects";
 import { ArrowLeft, ArrowRight } from 'tabler-icons-react';
 import { v4 as uuidv4 } from 'uuid';
 
+
 import Image from 'next/image';
 
 interface project {
@@ -18,6 +19,35 @@ interface project {
   description: string[],
   fullImagePath: string[],
 }
+
+const cardVariants = {
+  normal: {
+    rotateX: 0,
+    translateY: 0,
+    zIndex: 1
+  },
+  hover: {
+    rotateX: 60,
+    translateY: 50,
+    zIndex: 100,
+    transition: { 
+      duration: 0.3,
+      ease: "easeOut"
+    }
+  }
+};
+
+const overlayVariants = {
+  normal: {
+    opacity: 0
+  },
+  hover: {
+    opacity: 1,
+    transition: {
+      duration: 0.2
+    }
+  }
+};
 
 
 
@@ -46,7 +76,7 @@ const RenderProjects = (projects: project[], direction: 'left' | 'right' = 'left
 
     // Cleanup event listener
     return () => window.removeEventListener('resize', updateWidth);
-  }, []); // Empty dependency array means this runs once on mount
+  }, []); 
 
   const margin = 32;
   const width = projects.length * (projectWidth + margin);
@@ -57,7 +87,7 @@ const RenderProjects = (projects: project[], direction: 'left' | 'right' = 'left
 
   return (
     <motion.div
-      className="overflow-hidden h-full"
+      className=" h-full"
       initial={{ x: width }}
       animate={{ x: animateX }}
       transition={{
@@ -72,23 +102,53 @@ const RenderProjects = (projects: project[], direction: 'left' | 'right' = 'left
       >
         {Array.from({ length: 6 }).map(() =>
           projects.map((project) => (
-            <motion.div
-              key={uuidv4()}
-              className="flex-shrink-0 bg-white rounded-2xl relative overflow-hidden"
-              style={{ width: `${projectWidth}px`, height: '300px' }}
-            >
-              <Image
-                src={`${project.fullImagePath[0]}`}
-                alt={`Skill ${project.key}`}
-                fill style={{ objectFit: 'cover' }}
-              />
-              <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 opacity-0 hover:opacity-100 transition-opacity rounded-lg cursor-pointer"
-                onClick={() => {
-                  setChosenProject(project);
-                }}>
-                <span className="text-white text-lg font-bold">{project.title}</span>
-              </div>
-            </motion.div>
+            <motion.div 
+                key={project.key}
+                className="h-full w-full"
+                initial="normal"
+                whileHover="hover"
+                animate="normal"
+              >
+                <motion.div
+                  key={uuidv4()}
+                  className="flex-shrink-0 rounded-2xl relative"
+                  style={{
+                    width: `${projectWidth}px`,
+                    height: '300px',
+                    perspective: '1000px'
+                  }}
+                >
+                  <motion.div
+                    className="w-full h-full relative"
+                    style={{
+                      transformStyle: 'preserve-3d',
+                    }}
+                    variants={cardVariants}
+                  >
+                    <div className="absolute inset-0">
+                      <Image
+                        src={project.fullImagePath[0]}
+                        alt={`Skill ${project.key}`}
+                        fill 
+                        style={{ objectFit: 'cover' }}
+                        className="rounded-2xl h-full w-full"
+                      />
+                    </div>
+                    <motion.div 
+                      className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 rounded-lg cursor-pointer"
+                      variants={overlayVariants}
+                      onClick={() => setChosenProject(project)}
+                    >
+                      <motion.span 
+                        className="text-white text-lg font-bold"
+                        variants={overlayVariants}
+                      >
+                        {project.title}
+                      </motion.span>
+                    </motion.div>
+                  </motion.div>
+                </motion.div>
+              </motion.div>
           ))
         )}
       </div>
