@@ -401,7 +401,6 @@ export default function GlobeDemo() {
         },
     ];
 
-    const linkClassname = "w-[200px] h-12 2k:w-[300px] 2k:h-20 rounded-xl shadow-md bg-cyan-500 absolute"
 
     const linkPosition = [
         { top: "10%", left: "10%" },
@@ -416,7 +415,6 @@ export default function GlobeDemo() {
 
 
     const iconsize = 36;
-    const iconContainerSize = 32;
 
     const iconItems: iconItem[] = [
         { icon: <MapPin size={iconsize} />, text: 'Copenhagen, Denmark', href: 'https://maps.app.goo.gl/Sy4UewkYC8GePGfPA' },

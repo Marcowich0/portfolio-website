@@ -10,9 +10,6 @@ COPY package*.json ./
 # Install dependencies
 RUN npm install
 
-# Install sharp dependencies
-RUN apt-get update && apt-get install -y libvips-dev && rm -rf /var/lib/apt/lists/*
-
 # Copy the rest of the application code
 COPY . .
 

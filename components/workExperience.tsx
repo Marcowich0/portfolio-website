@@ -5,7 +5,7 @@ import { DateTime } from 'luxon';
 
 import { useWorkExperience } from '@/store/workExperience';
 import { motion, AnimatePresence, useInView } from 'framer-motion';
-import {  useState, useRef } from 'react';
+import { useState, useRef } from 'react';
 import Image from 'next/image';
 import { cubicBezier } from "framer-motion"
 
@@ -19,7 +19,7 @@ const totalDuration = 4;
 
 interface WorkExperienceProps {
     animate: boolean;
-  }
+}
 
 export default function WorkExperience({ animate }: WorkExperienceProps) {
 
@@ -31,7 +31,7 @@ export default function WorkExperience({ animate }: WorkExperienceProps) {
     const experienceRefs = useRef<(HTMLDivElement | null)[]>([]);
 
     const experienceData = useWorkExperience((state) => state.experience);
-  
+
     function calculateMonthDifference(startDate: string, endDate: string): number {
         const start = DateTime.fromISO(startDate);
         const end = DateTime.fromISO(endDate);
@@ -73,12 +73,12 @@ export default function WorkExperience({ animate }: WorkExperienceProps) {
 
     return (
         <div
-            className="w-full h-[500px] p-16 border-[6px] rounded-2xl border-zinc-300 overflow-visible"
+            className="w-full h-auto p-16  border-[6px] rounded-2xl border-zinc-300 overflow-visible"
             onMouseLeave={() => {
                 setHoveredIndex(null);
             }}>
             <div className='w-full h-full flex flex-row overflow-visible'>
-                <div className="relative w-full h-auto overflow-visible">
+                <div className="relative w-full h-auto pb-16 overflow-visible">
                     {verticalYearLines.map((line) => (
                         <div key={uuidv4()} className="absolute bottom-0 top-0 w-[5px] flex justify-center" style={{ left: `${line.position}%` }}>
                             <h1 className="text-4xl text-black">{line.year}</h1>
@@ -91,7 +91,7 @@ export default function WorkExperience({ animate }: WorkExperienceProps) {
 
                     <AnimatePresence mode="popLayout">
                         {hoveredIndex !== null && hoveredIndex !== undefined && (
-                            <div className='w-full h-full relative' key={hoveredIndex}>
+                            <div className='w-full h-full absolute' key={hoveredIndex}>
                                 <motion.div
                                     className='w-[650px] h-[300px] z-[9999] fixed flex justify-between p-4 rounded-2xl border-2 border-zinc-500 bg-zinc-50'
                                     style={{
@@ -118,7 +118,7 @@ export default function WorkExperience({ animate }: WorkExperienceProps) {
                                         <h1 className="text-teal-800 text-m opacity-80">{experienceData[hoveredIndex - 1].location}</h1>
                                         <div className='flex justify-end h-[75%] w-full my-4 bg-white p-4 rounded-lg border-2 border-zinc-200'>
                                             <div className='relative w-full h-full'>
-                                                <Image src={`/experienceLogos/${experienceData[hoveredIndex - 1].image}`} alt="big logo" fill style={{ objectFit:"contain" }} />
+                                                <Image src={`/experienceLogos/${experienceData[hoveredIndex - 1].image}`} alt="big logo" fill style={{ objectFit: "contain" }} />
                                             </div>
                                         </div>
                                     </div>
@@ -127,7 +127,24 @@ export default function WorkExperience({ animate }: WorkExperienceProps) {
                         )}
                     </AnimatePresence>
 
-                    <motion.div className="absolute top-14 w-full h-auto flex flex-col space-y-6 mt-3 overflow-visible"
+                    <div className='absolute top-14 w-full flex flex-col space-y-6 mt-3 overflow-visible'>
+                        {experienceData.map((exp, index) => (
+                            <div className='relative' style={{ left: `${dateToPosition(exp.time[0])}%`, width: `${dateToPosition(exp.time[1]) - dateToPosition(exp.time[0])}%` }}
+                                key={uuidv4()}>
+                                <div
+                                    key={uuidv4()}
+                                    ref={(el) => { (experienceRefs.current[index] = el) }}
+                                    className="relative h-12 rounded-full bg-zinc-400 border-2 border-zinc-400 overflow-hidden"
+                                >
+
+                                </div>
+                            </div>
+
+                        ))}
+                    </div>
+                    
+
+                    <motion.div className="relative top-14 w-full h-auto flex flex-col space-y-6 mt-3 overflow-visible"
                         initial={{ clipPath: 'inset(0 100% 0 0)' }}
                         animate={(isInView && animate) ? { clipPath: 'inset(0 0 0 0)' } : {}}
                         transition={{ duration: totalDuration, ease: "linear" }}
@@ -146,8 +163,8 @@ export default function WorkExperience({ animate }: WorkExperienceProps) {
                                         }
                                         if (experienceRefs.current[index] && hoveredIndex !== exp.id) {
                                             const position = experienceRefs.current[index].getBoundingClientRect();
-                                              setHoveredPosition(position);
-                                          }
+                                            setHoveredPosition(position);
+                                        }
                                     }}
                                     onMouseLeave={() => {
                                         setHoveredIndex(null);
@@ -167,17 +184,23 @@ export default function WorkExperience({ animate }: WorkExperienceProps) {
                                     </div>
                                 </div>
                             </div>
+
                         ))}
-                        
+
                     </motion.div>
-                    <motion.div className="absolute bottom-0 top-14 w-1" 
-                    initial={{left:"0px", transform: "translateX(-50%)"}}
-                    animate={(isInView && animate) ? { left:"100%" } : {}}
-                    transition={{ duration: totalDuration, ease: "linear" }}>
-                        <motion.div className="w-full h-full bg-black" 
-                        initial={{opacity:100}}
-                        animate={{opacity:0}}
-                        transition={{ duration: 1, delay:totalDuration, ease: "linear" }}/>
+
+                    
+
+                    
+
+                    <motion.div className="absolute bottom-0 top-14 w-1"
+                        initial={{ left: "0px", transform: "translateX(-50%)" }}
+                        animate={(isInView && animate) ? { left: "100%" } : {}}
+                        transition={{ duration: totalDuration, ease: "linear" }}>
+                        <motion.div className="w-full h-full bg-black"
+                            initial={{ opacity: 100 }}
+                            animate={{ opacity: 0 }}
+                            transition={{ duration: 1, delay: totalDuration, ease: "linear" }} />
                     </motion.div>
 
 

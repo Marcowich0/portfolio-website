@@ -19,8 +19,35 @@ interface project {
   fullImagePath: string[],
 }
 
+
+
 const RenderProjects = (projects: project[], direction: 'left' | 'right' = 'left', setChosenProject: (project: project) => void) => {
-  const projectWidth = 400;
+
+  const [projectWidth, setProjectWidth] = useState(400);
+
+useEffect(() => {
+  // Function to update width based on window size
+  const updateWidth = () => {
+    // You can add your own logic here, for example:
+    if (window.innerWidth < 1400) {
+      setProjectWidth(250);
+    } else if (window.innerWidth < 1800) {
+      setProjectWidth(325);
+    } else {
+      setProjectWidth(400);
+    }
+  };
+
+  // Set initial width
+  updateWidth();
+
+  // Add event listener
+  window.addEventListener('resize', updateWidth);
+
+  // Cleanup event listener
+  return () => window.removeEventListener('resize', updateWidth);
+}, []); // Empty dependency array means this runs once on mount
+
   const margin = 32;
   const width = projects.length * (projectWidth + margin);
   const totalWidth = (width + margin) * 2;
@@ -30,6 +57,7 @@ const RenderProjects = (projects: project[], direction: 'left' | 'right' = 'left
 
   const projectRef = useRef<HTMLDivElement>(null);
 
+  
   return (
     <motion.div
       className="overflow-hidden h-full"
@@ -97,7 +125,7 @@ export default function AnimatedProjects() {
   }, [chosenProject]);
 
   return (
-    <div className='w-full h-[632px] relative '>
+    <div className='w-full h-auto relative '>
       <div className='w-full h-full justify-center overflow-hidden'>
         <div className='w-[8000px] flex flex-col space-y-8'>
           {RenderProjects(firstHalf, "right", setChosenProject)}
@@ -116,7 +144,7 @@ export default function AnimatedProjects() {
           >
             <div className="flex flex-row w-full h-full relative">
               <div className="w-1/2 h-full flex flex-col justify-start">
-                <h1 className="text-slate-800 text-4xl font-bold ps-8 pt-8">{chosenProject.title}</h1>
+                <h1 className="text-zinc-800 text-4xl font-bold ps-8 pt-8">{chosenProject.title}</h1>
                 <h1 className="text-teal-600 text-2xl font-bold ps-8">{chosenProject.monthYear}</h1>
                 <div className="w-full h-full p-8 flex flex-col justify-between relative">
                   <div className="w-1 bg-teal-400 absolute" style={{ top: "52px", left: "40px", bottom: "52px", transform: "translateX(-50%)" }} />

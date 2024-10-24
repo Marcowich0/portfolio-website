@@ -13,8 +13,6 @@ import AnimatedProjects from "@/components/projects";
 import FlippingCard from "@/components/education";
 import GlobeDemo from "@/components/globe";
 
-import BackPage from "@/components/backPage";
-
 import { motion } from 'framer-motion';
 
 export default function Home() {
