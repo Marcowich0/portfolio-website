@@ -50,33 +50,19 @@ const overlayVariants = {
   }
 };
 
-const modelVariants = {
-  normal: {
-    opacity: 0,
-    scale: 0.8,
-    transition: {
-      duration: 0.3
-    }
-  },
-  hover: {
-    opacity: 1,
-    scale: 1,
-    transition: {
-      duration: 0.3
-    }
-  }
-};
+
 
 
 
 const RenderProjects = (projects: project[], direction: 'left' | 'right' = 'left', setChosenProject: (project: project) => void) => {
-
   const [projectWidth, setProjectWidth] = useState(400);
+  const [showModel, setShowModel] = useState<project | null>(null);
+  const [modelIndex, setModelIndex] = useState(0);
+  const [hoveredId, setHoveredId] = useState<string | null>(null);
 
   useEffect(() => {
     // Function to update width based on window size
     const updateWidth = () => {
-      // You can add your own logic here, for example:
       if (window.innerWidth < 1400) {
         setProjectWidth(250);
       } else if (window.innerWidth < 1800) {
@@ -105,7 +91,7 @@ const RenderProjects = (projects: project[], direction: 'left' | 'right' = 'left
 
   return (
     <motion.div
-      className=" h-full"
+      className="h-full"
       initial={{ x: width }}
       animate={{ x: animateX }}
       transition={{
@@ -118,72 +104,86 @@ const RenderProjects = (projects: project[], direction: 'left' | 'right' = 'left
         className="flex flex-row items-center h-full space-x-8"
         style={{ width: `${totalWidth}px` }}
       >
-        {Array.from({ length: 6 }).map(() =>
-          projects.map((project) => (
-            <motion.div
-      key={project.key}
-      className="h-full w-full cursor-pointer relative"
-      initial="normal"
-      whileHover="hover"
-      animate="normal"
-      onClick={() => setChosenProject(project)}
-    >
-      <motion.div 
-        className="absolute inset-0 z-[100] "
-        variants={modelVariants}
-      >
-        <div className="w-4/5 h-full absolute top-[-70px] flex justify-center items-center"
-        style={{left:"50%", right:"50%", transform:"translateX(-50%)"}}>
-          <STLViewer url="/projectPictures/dart/dart2.STL"/> 
-        </div>
-      </motion.div>
+        {Array.from({ length: 4 }).map((_, index) =>
+          projects.map((project) => {
+            const uniqueId = `${project.key}-${index}`;
+            return (
+              <motion.div
+                key={uniqueId}
+                className="h-full w-full cursor-pointer relative"
+                onClick={() => setChosenProject(project)}
+                onMouseEnter={() => {
+                  setHoveredId(uniqueId);
+                  setShowModel(project);
+                  setModelIndex(index);
+                }}
+                onMouseLeave={() => {
+                  setHoveredId(null);
+                  setShowModel(null);
+                }}
+              >
+                <AnimatePresence>
+                  {showModel && project === showModel && index === modelIndex && (
+                    <motion.div 
+                      className="w-[80%] h-[100%] absolute -top-12 left-1/2  z-[60]"
+                      initial={{ opacity: 0, left: '50%', transform: 'translateX(-50%)', height:"30%", top: '50%' }}
+                      animate={{ opacity: 1, height:"100%", top: '-80px'}}
+                      exit={{opacity: 0, height:"30%", top: '50%' }}
+                      transition={{ duration: 0.3 }}
+                    >
+                      <STLViewer url="/projectPictures/dart/dart2.STL"/>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
 
-      <motion.div
-        key={uuidv4()}
-        className="flex-shrink-0 rounded-2xl relative"
-        style={{
-          width: `${projectWidth}px`,
-          height: '300px',
-          perspective: '1000px'
-        }}
-      >
-        <motion.div
-          className="w-full h-full relative"
-          style={{
-            transformStyle: 'preserve-3d',
-          }}
-          variants={cardVariants}
-        >
-          <div className="absolute inset-0">
-            <Image
-              src={project.fullImagePath[0]}
-              alt={`Skill ${project.key}`}
-              fill
-              style={{ objectFit: 'cover' }}
-              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-              className="rounded-2xl h-full w-full"
-            />
-          </div>
-          <motion.div
-            className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 rounded-lg"
-            variants={overlayVariants}
-          >
-            <motion.span
-              className="text-white text-lg font-bold"
-              variants={overlayVariants}
-            >
-              {project.title}
-            </motion.span>
-          </motion.div>
-        </motion.div>
-      </motion.div>
-    </motion.div>
-          ))
+                <motion.div
+                  className="flex-shrink-0 rounded-2xl relative"
+                  style={{
+                    width: `${projectWidth}px`,
+                    height: '300px',
+                    perspective: '1000px'
+                  }}
+                >
+                  <motion.div
+                    className="w-full h-full relative"
+                    style={{
+                      transformStyle: 'preserve-3d',
+                    }}
+                    animate={hoveredId === uniqueId ? "hover" : "normal"}
+                    variants={cardVariants}
+                  >
+                    <div className="absolute inset-0">
+                      <Image
+                        src={project.fullImagePath[0]}
+                        alt={`Skill ${project.key}`}
+                        fill
+                        style={{ objectFit: 'cover' }}
+                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                        className="rounded-2xl h-full w-full"
+                      />
+                    </div>
+                    <motion.div
+                      className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 rounded-lg"
+                      variants={overlayVariants}
+                    >
+                      <motion.span
+                        className="text-white text-lg font-bold"
+                        variants={overlayVariants}
+                      >
+                        {project.title}
+                      </motion.span>
+                    </motion.div>
+                  </motion.div>
+                </motion.div>
+              </motion.div>
+            );
+          })
         )}
       </div>
     </motion.div>
   );
 };
+
 
 
 export default function AnimatedProjects() {
@@ -212,7 +212,7 @@ export default function AnimatedProjects() {
   return (
     <div className='w-full h-auto relative '>
       <div className='w-full h-full justify-center overflow-hidden'>
-        <div className='w-[8000px] flex flex-col space-y-8'>
+        <div className=' my-12 w-[8000px] flex flex-col space-y-8'>
           {RenderProjects(firstHalf, "right", setChosenProject)}
           {RenderProjects(secondHalf, "left", setChosenProject)}
         </div>

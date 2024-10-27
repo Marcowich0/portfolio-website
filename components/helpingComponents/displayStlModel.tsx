@@ -1,125 +1,127 @@
-import React, { Suspense, useRef, useEffect } from 'react';
-import { Canvas, useLoader, useThree, useFrame } from '@react-three/fiber';
-import { PerspectiveCamera, Html, Center } from '@react-three/drei';
+import React, { useState, useEffect, useRef } from 'react';
+import { Canvas, useFrame, useThree } from '@react-three/fiber';
+import { OrbitControls, Center, Edges } from '@react-three/drei';
 import { STLLoader } from 'three/examples/jsm/loaders/STLLoader';
 import * as THREE from 'three';
 
-const Model = ({ url }: { url: string }) => {
-  const geometry = useLoader(STLLoader, url) as THREE.BufferGeometry;
-  const groupRef = useRef<THREE.Group>(null);
-  const { camera } = useThree();
+const Model = ({ url, onLoaded }: { url: string; onLoaded?: (size: THREE.Vector3) => void }) => {
+  const [geometry, setGeometry] = useState<THREE.BufferGeometry | null>(null);
+  const meshRef = useRef<THREE.Mesh>(null);
 
+  useEffect(() => {
+    const loader = new STLLoader();
+    loader.load(url, (geometry) => {
+      geometry.center();
+      geometry.computeVertexNormals();
+      geometry.computeBoundingBox();
+
+      // Rotate to match desired orientation (red up)
+      geometry.rotateX(Math.PI);
+
+      setGeometry(geometry);
+
+      if (geometry.boundingBox && onLoaded) {
+        const size = new THREE.Vector3();
+        geometry.boundingBox.getSize(size);
+        onLoaded(size);
+      }
+    });
+  }, [url, onLoaded]);
+
+  // Apply rotation to the model
   useFrame(() => {
-    if (groupRef.current) {
-      groupRef.current.rotation.y += 0.005;
+    if (meshRef.current) {
+      meshRef.current.rotation.x += 0.005; // Slow rotation around the x-axis
     }
   });
 
+  if (!geometry) return null;
+
+  return (
+    <mesh ref={meshRef} geometry={geometry}>
+      <meshStandardMaterial 
+        color="#808080"
+        roughness={0.5}
+        metalness={0.5}
+      />
+      <Edges 
+        threshold={15} // Adjust to make edges clearer
+        color="black"
+      />
+    </mesh>
+  );
+};
+
+const CameraController = ({ size }: { size: THREE.Vector3 }) => {
+  const { camera } = useThree();
+
   useEffect(() => {
-    if (groupRef.current) {
-      // Get the bounding box of the model
-      const boundingBox = new THREE.Box3().setFromObject(groupRef.current);
-      const center = boundingBox.getCenter(new THREE.Vector3());
-      const size = boundingBox.getSize(new THREE.Vector3());
-      
-      // Calculate the radius of the bounding sphere
-      const radius = Math.max(size.x, size.y, size.z) * 0.5;
-      
-      // Calculate camera position based on model size
-      const fov = (camera as THREE.PerspectiveCamera).fov * (Math.PI / 180);
-      const distance = radius / Math.sin(fov / 2);
-      
-      camera.position.set(0, 0, distance);
-      camera.near = distance / 100;
-      camera.far = distance * 100;
-      camera.lookAt(center);
+    if (size) {
+      const maxDimension = Math.max(size.x, size.y, size.z);
+      const distance = maxDimension * 1.5; // Set distance based on the model size
+
+      camera.position.set(0, -distance, 0);
+      camera.lookAt(0, 0, 0);
       camera.updateProjectionMatrix();
-
-      // Center the model
-      groupRef.current.position.set(-center.x, -center.y, -center.z);
     }
-  }, [geometry, camera]);
+  }, [size, camera]);
 
-  return (
-    <Center>
-      <group ref={groupRef}>
-        {/* Main mesh */}
-        <mesh 
-          geometry={geometry}
-          rotation={[Math.PI / 2, Math.PI / 2, 0]}
-        >
-          <meshPhongMaterial 
-            color="#e0e0e0"
-            specular="#ffffff"
-            shininess={100}
-          />
-        </mesh>
-        
-        {/* Edge wireframe */}
-        <mesh 
-          geometry={geometry}
-          rotation={[Math.PI / 2, Math.PI / 2, 0]}
-        >
-          <meshBasicMaterial
-            color="#000000"
-            wireframe={true}
-            wireframeLinewidth={1}
-            transparent={true}
-            opacity={0.15}
-          />
-        </mesh>
-        
-        {/* Edge highlighting */}
-        <lineSegments
-          rotation={[Math.PI / 2, Math.PI / 2, 0]}
-        >
-          <edgesGeometry args={[geometry]} />
-          <lineBasicMaterial 
-            color="#000000" 
-            opacity={0.3}
-            transparent={true}
-          />
-        </lineSegments>
-      </group>
-    </Center>
-  );
+  return null;
 };
 
-const LoadingIndicator = () => {
-  return (
-    <Html center>
-      <div className="text-blue-500 text-lg">Loading...</div>
-    </Html>
-  );
-};
+interface STLViewerProps {
+  url?: string;
+}
 
-const STLViewer = ({ url = '/sample.stl' }) => {
+const STLViewer: React.FC<STLViewerProps> = ({ url = '/projectPictures/dart/dart2.STL' }) => {
+  const [modelSize, setModelSize] = useState<THREE.Vector3 | null>(null);
+
+  const handleModelLoaded = (size: THREE.Vector3) => {
+    setModelSize(size);
+  };
+
   return (
-    <div className="w-full h-full">
+    <div style={{
+      width: '100%',
+      height: '100%',
+      display: 'flex',
+      justifyContent: 'center',
+      alignItems: 'center',
+      borderRadius: '8px',
+    }}>
+      
       <Canvas
-        gl={{
-          alpha: true,
-          antialias: true,
-          preserveDrawingBuffer: true
-        }}
-        camera={{ 
+        camera={{
           fov: 45,
           near: 0.1,
-          far: 50000,
-          position: [0, 0, 1400]
+          far: 20000,
+          position: [0, -5000, 0], // Initial camera position
+          up: new THREE.Vector3(1, 0, 0) // Set red axis as up
         }}
-        style={{ width: '100%', height: '100%' }}
+        style={{ background: 'transparent' }} // Transparent background
       >
-        <Suspense fallback={<LoadingIndicator />}>
-          <PerspectiveCamera 
-            makeDefault 
-            fov={45}
-          />
-          <ambientLight intensity={0.5} />
-          <pointLight position={[10, 10, 10]} intensity={1} />
-          <pointLight position={[-10, -10, -10]} intensity={0.5} />
-          <Model url={url} />
-        </Suspense>
+        {modelSize && <CameraController size={modelSize} />}
+
+        <ambientLight intensity={0.6} />
+        <hemisphereLight intensity={0.5} />
+        <directionalLight
+          position={[10, 10, 10]}
+          intensity={0.8}
+          castShadow
+        />
+
+        <Center>
+          <Model url={url} onLoaded={handleModelLoaded} />
+        </Center>
+
+        {/* Disable all user interactions in OrbitControls */}
+        <OrbitControls
+          enableDamping={false}
+          enableZoom={false}
+          enablePan={false}
+          enableRotate={false}
+          up={new THREE.Vector3(1, 0, 0)} // Set red axis as up
+        />
       </Canvas>
     </div>
   );
