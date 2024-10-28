@@ -140,6 +140,9 @@ const RenderProjects = (projects: project[], direction: 'left' | 'right' = 'left
                       </motion.div>
                       <motion.span
                         className="w-full text-center text-white text-lg font-bold absolute bottom-16 left-1/2 transform -translate-x-1/2 z-[80]"
+                        initial={{ opacity: 0, bottom: '32px' }}
+                        animate={{ opacity: 1, bottom: '64px' }}
+                        exit={{ opacity: 0, bottom: '32px' }}
                       >
                         {project.title}
                       </motion.span>

@@ -1,0 +1,26 @@
+services:
+  nextjs:
+    build: 
+      args:
+          - NODE_ENV=${NODE_ENV:-production}
+      context: .
+      dockerfile: Dockerfile
+    image: marcowich/nextjs-app:${TAG:-latest}
+    ports:
+      - "8080:8080"
+    environment:
+      - NODE_ENV=production
+      - PORT=8080    # Added to match your Dockerfile
+      - HOST=0.0.0.0 # Added to match your Dockerfile
+      - SMTP_HOST=smtp.gmail.com     # Change this to your SMTP server
+      - SMTP_PORT=587               # Common SMTP ports: 587 (TLS) or 465 (SSL)
+      - SMTP_SECURE=false          # Use 'true' for port 465, 'false' for port 587
+      - SMTP_USER=marcowich040500@gmail.com    # Your email address
+      - SMTP_PASS=avnoqlyrzvvoquqj       # Your email password or app-specific password
+      - SMTP_FROM=marcowich040500@gmail.com    # The "from" address for notification emails
+      - NOTIFY_EMAIL=marcowich040500@gmail.com # Where to send notifications
+    restart: unless-stopped
+    volumes:
+      - .:/app
+      - /app/node_modules
+      - /app/.next
