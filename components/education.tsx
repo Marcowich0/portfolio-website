@@ -139,7 +139,7 @@ export default function FlippingCard() {
                 </div>
                 <div className='flex flex-col w-1/3 items-end'>
                   <h1 className='text-black font-bold text-3xl opacity-80'>{chosenEducation.year}</h1>
-                  <h2 className='text-black font-bold text-xl opacity-60 mt-2'>{chosenEducation.location}</h2>
+                  <h2 className='text-black font-bold text-[20px] opacity-60 mt-2'>{chosenEducation.location}</h2>
                 </div>
               </div>
 
