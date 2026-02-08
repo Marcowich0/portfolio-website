@@ -142,7 +142,7 @@ export default function Home() {
           <Headline title="Work Experience" />
 
           <motion.div className="mb-12 flex justify-center">
-            <h4 className={smallHeadLineClassName}> I have been working since my early teens, here is a quick overview of the companies i have contribuated to</h4>
+            <h4 className={smallHeadLineClassName}> I have been working since my early teens, here is a quick overview of the companies I have contributed to</h4>
           </motion.div>
 
           <WorkExperience animate={animateWorkExperience} />
@@ -160,7 +160,7 @@ export default function Home() {
           <Headline title="Education" />
 
           <motion.div className="mb-12 flex justify-center">
-            <h4 className={smallHeadLineClassName}> I have a masters degree in mechanical engineering, here is an overview of my education earning that title</h4>
+            <h4 className={smallHeadLineClassName}> I have a master's degree in mechanical engineering, here is an overview of my education earning that title</h4>
           </motion.div>
 
           <FlippingCard />
@@ -180,7 +180,7 @@ export default function Home() {
         >
           <Headline title="Projects" />
           <motion.div className=" flex justify-center -mb-12">
-            <h4 className={smallHeadLineClassName}> I do personal projects all the time, here is a few notable ones, as long with some from my studies</h4>
+            <h4 className={smallHeadLineClassName}> I do personal projects all the time, here are a few notable ones, along with some from my studies</h4>
           </motion.div>
 
           <AnimatedProjects />
@@ -197,7 +197,7 @@ export default function Home() {
           <Headline title="Skills" />
 
           <motion.div className="flex justify-center">
-            <h4 className={smallHeadLineClassName}> Through Work, School and spare time projects, i have gained experience in a veriety of applications and programming languages. Here is a quick categorized overview of my skill level</h4>
+            <h4 className={smallHeadLineClassName}> Through work, school and spare time projects, I have gained experience in a variety of applications and programming languages. Here is a quick categorized overview of my skill level</h4>
           </motion.div>
 
           <div className="w-full h-full mt-12">

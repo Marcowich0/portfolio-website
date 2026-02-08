@@ -60,7 +60,7 @@ export default function FrontPage() {
           style={{
             bottom: `${scrollY}px`,
             left: "0px",
-            backgroundImage: `url("/mechanical_engineering.jpeg")`,
+            backgroundImage: `url("/data_engineer.webp")`,
             backgroundSize: "cover",
             backgroundPosition: "center",
           }}
@@ -75,7 +75,7 @@ export default function FrontPage() {
             </h1>
             <h1 className="text-white font-bold -my-4 text-[50px] 2xl:text-[70px]">
               <TypewriterText 
-                text="Mechanical Engineer"
+                text="Data Engineer"
                 delay={50}
                 startTyping={nameComplete}
               />

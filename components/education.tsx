@@ -186,7 +186,7 @@ const education_data = [
     subtitle: "HTX - Math/Physics",
     year: "2016-2019",
     location: "Roskilde, Denmark",
-    description: "After primary school, i attended Roskilde Tekniske Gymnasium, on the math/physics line. Here i learned the basics of physics and math, and got a good foundation for my further studies in mechanical engineering",
+    description: "After primary school, I attended Roskilde Tekniske Gymnasium, on the math/physics line. Here I learned the basics of physics and math, and got a good foundation for my further studies in mechanical engineering",
     GPA: "11.0",
   },
   {
@@ -196,7 +196,7 @@ const education_data = [
     subtitle: "B.Sc. Mechanical Engineering",
     year: "2019-2022",
     location: "Kongens Lyngby, Denmark",
-    description: "For my bachelors degree i studied mechanical engineering at the Technical University of Denmark. Here i mostly took introductory courses to get a good foundations for my further studies. This included Math, Physics, Chemistry, Programming, Material science, Thermodynamics, Fluid dynamics, Strength of materials, and many more. For my thesis i investigated the posibility of using neural networks to analyze and optimize turbine wakes in large wind farms.",
+    description: "For my bachelor's degree I studied mechanical engineering at the Technical University of Denmark. Here I mostly took introductory courses to get a good foundation for my further studies. This included Math, Physics, Chemistry, Programming, Material science, Thermodynamics, Fluid dynamics, Strength of materials, and many more. For my thesis I investigated the possibility of using neural networks to analyze and optimize turbine wakes in large wind farms.",
     GPA: "10.1",
   },
   {
@@ -206,7 +206,7 @@ const education_data = [
     subtitle: "M.Sc. Mechanical Engineering",
     year: "2022-2025",
     location: "Kongens Lyngby, Denmark",
-    description: "For my masters degree I continued my studies at the Technical University of Denmark. Here i began to specialize in programming, computational fluid dynamics and robotics. I also decided to prolong my studies by half a year, as this allowed me to get experience in the industy. For my thesis I developed an robotics add-on to an open-source CAD software which allows users to compute advanced trajectory planning based on regular CAD assemblies.",
+    description: "For my master's degree I continued my studies at the Technical University of Denmark. Here I began to specialize in programming, computational fluid dynamics and robotics. I also decided to prolong my studies by half a year, as this allowed me to get experience in the industry. For my thesis I developed a robotics add-on to an open-source CAD software which allows users to compute advanced trajectory planning based on regular CAD assemblies.",
     GPA: "10.7",
   },
 ];

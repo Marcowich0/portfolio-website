@@ -57,7 +57,7 @@
         "image": "novo.jpg",
         "description": [
             "Built 10+ data pipelines and 4 dashboards through Palantir Foundry.",
-            "Maintained a PostgreSQL database by updating decrepitated views.",
+            "Maintained a PostgreSQL database by updating deprecated views.",
             "Supported compliance processes for digital solutions within a GxP environment."
         ]
     },
@@ -68,14 +68,29 @@
         "location": "Hillerød, Denmark",
         "time": [
             "2025-07-01",
-            "present"
+            "2025-11-30"
         ],
         "image": "novo.jpg",
         "description": [
             "Migrated the facility's main PostgreSQL database to Databricks to create a unified data platform.",
-            "Lead full stack developer on two internal applications, automating manual metrology processes.",
+            "Served as lead full stack developer on two internal applications, automating manual metrology processes.",
             "Conducted mob-programming sessions to upskill colleagues on software development.",
             "Simplified highly complex CAD-models to reduce computational load in digital twin simulations."
+        ]
+    },
+    {
+        "id": 6,
+        "name": "SoftwareOne",
+        "position": "Senior Data Engineer",
+        "location": "Remote",
+        "time": [
+            "2026-01-01",
+            "present"
+        ],
+        "image": "softwareone.png",
+        "description": [
+            "Design and build scalable data pipelines and platforms.",
+            "Collaborate with stakeholders to deliver data solutions that drive business value."
         ]
     }
 ]
